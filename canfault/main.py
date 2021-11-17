@@ -21,9 +21,10 @@ def tearDownChannel(ch):
 
 
 if __name__ == '__main__':
+
     ch = setUpChannel(channel=0)
     ch1 = setUpChannel(channel = 1)
-    ch.write(transciever.create_random_frame())
+    ch.write(transceiver.transmit(1))
     corrupt.corrupt_frame(ch1.read())
     tearDownChannel(ch)
     tearDownChannel(ch1)

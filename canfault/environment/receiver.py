@@ -1,5 +1,4 @@
 import canlib
-from readwrite import canreadfault
 from canlib import Frame
 
 class Receiver:

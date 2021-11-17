@@ -1,6 +1,4 @@
-
-from readwrite import canwritefault
-import framefactory
+from . import framefactory
 
 class Transceiver:
     def __init__(self):
