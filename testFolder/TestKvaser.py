@@ -7,7 +7,7 @@ chd = canlib.ChannelData(channel)
 print("CANlib version: v{}".format(chd.dll_product_version))
 print("canlib dll version: v{}".format(chd.dll_file_version))
 print("Using channel: {ch}, EAN: {ean}".
-   format(ch=chd.device_name, ean=chd.card_upc_no))
+   format(ch=chd.channel_name, ean=chd.card_upc_no))
 
 ch1 = canlib.openChannel(channel, canlib.canOPEN_ACCEPT_VIRTUAL)
 ch1.setBusOutputControl(canlib.canDRIVER_NORMAL)
