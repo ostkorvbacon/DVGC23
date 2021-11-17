@@ -1,2 +1,0 @@
-BUSTYPE = "virtual"
-RECIEVE_OWN_MESSAGE = True
