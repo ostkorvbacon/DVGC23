@@ -1,6 +1,5 @@
 from canlib import canlib, Frame
 import random
-from readwrite import canwritefault
 
 def create_random_frame():
     random.seed(0)
