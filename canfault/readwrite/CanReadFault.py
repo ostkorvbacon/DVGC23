@@ -1,6 +1,4 @@
 from canlib import canlib
-import asyncio
-import constants
 
 def read(channel, func):
     while True:
