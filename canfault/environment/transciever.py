@@ -1,6 +1,6 @@
 from canlib import canlib, Frame
 import random
-import canreadfault
+from readwrite import canwritefault
 
 def create_random_frame():
     random.seed(0)
@@ -22,5 +22,5 @@ def create_frames(number_of_frames):
 def transmit(number_of_frames):
     frames = create_frames(number_of_frames)
     for f in frames:
-        
-
+        print("transmitting\n")
+        #canwritefault()
