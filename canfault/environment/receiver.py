@@ -1,5 +1,4 @@
 import canlib
-from readwrite import canreadfault
 
 def receive():
     #canreadfault()
