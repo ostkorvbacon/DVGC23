@@ -1,26 +1,14 @@
-from canlib import canlib, Frame
-import random
 
-def create_random_frame():
-    random.seed(0)
-    min = 0
-    max = 100
-    data_amount = 4
-    data = []
-    for i in range(0, data_amount):
-        data.append(random.randint(min, max))
-    frame = Frame(id_ = 100, data = data, flags = canlib.MessageFlag.EXT)
-    return frame
+from readwrite import canwritefault
+import framefactory
 
-def create_frames(number_of_frames):
-    frames = []
-    for i in range(0, number_of_frames):
-        frames.append(create_random_frame())
-    return frames
+class Transceiver:
+    def __init__(self):
+        self.factory
 
-def transmit(number_of_frames):
-    frames = create_frames(number_of_frames)
-    return frames
-    #for f in frames:
-    #print("transmitting\n)
-        #canwritefault()
+    """Specify the number of frames to be created and transmitted over the channel"""
+    def transmit(self, number_of_frames):
+        frames = self.factory.create_frames(number_of_frames)
+        for f in frames:
+            print("Transmitting frame\n")
+            return f

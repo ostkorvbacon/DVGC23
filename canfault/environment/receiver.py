@@ -1,6 +1,10 @@
 import canlib
+from readwrite import canreadfault
+from canlib import Frame
 
-def receive():
-    #canreadfault()
-    print("receiving\n")
-    #print(frame)
+class Receiver:
+
+    def receive():
+        #canreadfault()
+        print("Receiving\n")
+        #print(frame)
