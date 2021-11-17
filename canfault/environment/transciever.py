@@ -21,6 +21,7 @@ def create_frames(number_of_frames):
 
 def transmit(number_of_frames):
     frames = create_frames(number_of_frames)
-    for f in frames:
-        print("transmitting\n")
+    return frames
+    #for f in frames:
+    #print("transmitting\n)
         #canwritefault()
