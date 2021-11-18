@@ -11,7 +11,5 @@ class Transceiver:
     """Transmit a random frame over the channel"""
     def transmit(self):
         frame = self.factory.create_random_frame()
-        print("Frame: {} being corrupted\n".format(frame))
-        frame = corrupt.corrupt_frame(frame)
         print("Frame {} being transmitted\n".format(frame))
-        self.channel.write(frame)
+        CanWriteFault(self.channel, corrupt, frame)
