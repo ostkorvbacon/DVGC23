@@ -1,10 +1,12 @@
 import tracemalloc
 from canlib import canlib, Frame
 from canlib.canlib import ChannelData
+import sys
+sys.path.append("..")
 
 import CanReadFault
 import CanWriteFault
-from .. import main
+from main import setUpChannel, tearDownChannel
 
 def setUpChannel(channel=0,
                  openFlags=canlib.canOPEN_ACCEPT_VIRTUAL,
