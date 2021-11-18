@@ -1,24 +1,15 @@
-import CanReadFault
-import CanWriteFault
+import tracemalloc
 from canlib import canlib, Frame
 from canlib.canlib import ChannelData
-import tracemalloc
+import sys
+sys.path.append("..")
 
-def setUpChannel(channel=0,
-                 openFlags=canlib.canOPEN_ACCEPT_VIRTUAL,
-                 bitrate=canlib.canBITRATE_500K,
-                 bitrateFlags=canlib.canDRIVER_NORMAL):
-    ch = canlib.openChannel(channel, openFlags)
-    print("Using channel: %s, EAN: %s" % (ChannelData(channel).channel_name,
-                                          ChannelData(channel).card_upc_no))
-    ch.setBusOutputControl(bitrateFlags)
-    ch.setBusParams(bitrate)
-    ch.busOn()
-    return ch
+import CanReadFault
+import CanWriteFault
+from main import setUpChannel, tearDownChannel
 
-def tearDownChannel(ch):
-    ch.busOff()
-    ch.close()
+def do_nothing(frame):
+    return frame
 
 def main():
     print("Setting up channel!")
@@ -30,7 +21,7 @@ def main():
         data=[1, 2, 3, 4],
         flags=canlib.MessageFlag.EXT
     )
-    CanWriteFault.write(channel1, CanWriteFault.do_nothing, frame)
+    CanWriteFault.write(channel1, do_nothing, frame)
     print("Reading on channel!")
     CanReadFault.read(channel0, print)
     tearDownChannel(channel0)
