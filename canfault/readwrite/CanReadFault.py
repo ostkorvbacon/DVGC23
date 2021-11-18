@@ -11,7 +11,6 @@ def read(channel, func, frame = None, params = []):
             if(frame is None):
                 frame = channel.read()
             return func(frame, params)
-            break
         except (canlib.canNoMsg) as ex:
             pass
         except (canlib.canError) as ex:

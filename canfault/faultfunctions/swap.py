@@ -14,5 +14,4 @@ def swap(frame, params):
     if(set_stored is None)
         return set_stored(frame)
     else:
-        params[0].write(set_stored)
-        return frame
+        return set_stored(frame), frame
