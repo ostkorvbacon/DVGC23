@@ -1,0 +1,2 @@
+def funk():
+    print("hej")
