@@ -1,6 +1,7 @@
 from canlib import canlib, Frame
 from canlib.canlib import ChannelData
 from environment import transciever, receiver
+from faultfunctions import corrupt, duplicate
 def setUpChannel(channel=0,
                  openFlags=canlib.canOPEN_ACCEPT_VIRTUAL,
                  bitrate=canlib.canBITRATE_500K,
@@ -20,8 +21,10 @@ def tearDownChannel(ch):
 
 
 if __name__ == '__main__':
+
     ch = setUpChannel(channel=0)
     ch1 = setUpChannel(channel = 1)
-    ch.write(transciever.create_random_frame())
-    print("Read: {}", format(ch1.read()))
+    ch.write(transceiver.transmit(1))
+    corrupt.corrupt_frame(ch1.read())
     tearDownChannel(ch)
+    tearDownChannel(ch1)
