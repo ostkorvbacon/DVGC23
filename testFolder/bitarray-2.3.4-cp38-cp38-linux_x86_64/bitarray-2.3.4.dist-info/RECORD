@@ -1,0 +1,16 @@
+bitarray/__init__.py,sha256=66_X_-_hyEuPcvd0Cdy5EPQjQM-xARjTC55McFgSlhE,2727
+bitarray/__init__.pyi,sha256=1sa13V2YZPWBosw1B3S2Ag85hQwxlA0CPUsKiV8XwuY,4408
+bitarray/_bitarray.cpython-38-x86_64-linux-gnu.so,sha256=MvYzk0G_BV0rUZcsqHmwZ1vqOAHrQP71RtwdV-e37jk,264504
+bitarray/_util.cpython-38-x86_64-linux-gnu.so,sha256=BSWzPMQAABgy1jJLG_83C4TFVNct8dvWBY2ByvBMQig,89832
+bitarray/bitarray.h,sha256=9V16nV4Jf0BD3VqqXTpLjOzwNZ4a-wlC0TRCD_d2YAk,5715
+bitarray/py.typed,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0
+bitarray/pythoncapi_compat.h,sha256=tardZ3T2CnEfUO6kb2s8d1TkmHUAqg4XzRTQwUiOdUU,8849
+bitarray/test_bitarray.py,sha256=-NKaZrGLxShZB5jgLGigNoOZUsQxE4tXxcp6KY2OEg4,153327
+bitarray/test_data.pickle,sha256=v5oAS4jJwWDVDh8s0mPn4iCvwN3-Y5sZWpVGkpwyCqw,356
+bitarray/test_util.py,sha256=e5QOWy6MK5sJ-VUha5nb77giYDuaGc_Of8tOMne6nwk,55010
+bitarray/util.py,sha256=HddEz_jGwND_vZahmz3KOFWOx_alW07scRO5kIdTqvA,12868
+bitarray/util.pyi,sha256=fpRVTdTWUVP_mEUsXJTcFd1Zdc9c6eDmWfetrSh22xo,1741
+bitarray-2.3.4.dist-info/METADATA,sha256=5LJoR1SFGgMSqsieY9OthctMjba5qfB5YSG4IodRAnE,28806
+bitarray-2.3.4.dist-info/WHEEL,sha256=TpFVeXF_cAlV118WSIPWtjqW7nPvzoOw-49FmS3fDKQ,103
+bitarray-2.3.4.dist-info/top_level.txt,sha256=cLdoeIHotTwh4eHSe8qy8umF7zzyxUM90I8zFb2_xhg,9
+bitarray-2.3.4.dist-info/RECORD,,
