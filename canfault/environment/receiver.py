@@ -7,7 +7,7 @@ class Receiver:
         self.channel = channel
 
     def receive(self):
-        frame = CanReadFault()
+        frame = CanReadFault.read()
         print("Receiving:\n")
         print(frame)
         print("\n")
