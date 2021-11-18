@@ -8,7 +8,7 @@ import CanReadFault
 import CanWriteFault
 from main import setUpChannel, tearDownChannel
 
-def do_nothing(frame):
+def do_nothing(frame, params):
     return frame
 
 def main():
@@ -23,7 +23,8 @@ def main():
     )
     CanWriteFault.write(channel1, do_nothing, frame)
     print("Reading on channel!")
-    CanReadFault.read(channel0, print)
+    msg = CanReadFault.read(channel0, do_nothing, params = ["Hej", "hejsan"])
+    print(msg)
     tearDownChannel(channel0)
     tearDownChannel(channel1)
 
