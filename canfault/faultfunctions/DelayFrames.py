@@ -1,2 +1,2 @@
 def funk():
-    print("Ali säger hejsan")
+    print("Ali säger Wazaammm")
