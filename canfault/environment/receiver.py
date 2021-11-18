@@ -6,8 +6,11 @@ class Receiver:
     def __init__(self, channel):
         self.channel = channel
 
+    """Print the content of the frame"""
     def receive(self):
         frame = CanReadFault.read()
-        print("Receiving:\n")
-        print(frame)
-        print("\n")
+        while frame is not None:
+            print("Receiving:\n")
+            print(frame)
+            print("\n")
+            frame = CanReadFault.read()
