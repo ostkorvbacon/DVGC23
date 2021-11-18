@@ -12,7 +12,8 @@ class FrameFactory:
        random.seed() 
        data = []
        for i in range(0, self.data_amount):
-           data.append(random.randint(min, max))
+           datapoint = random.randint(self.min, self.max)
+           data.append(datapoint)
        frame = Frame(id_ = random.randint(0, 1023), data = data, flags = canlib.MessageFlag.EXT)
        return frame
 
@@ -23,6 +24,3 @@ class FrameFactory:
             frames.append(self.create_random_frame(self))
         
         return frames
-
-
-   

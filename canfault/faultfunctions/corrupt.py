@@ -5,4 +5,4 @@ def corrupt_frame(frame):
     print(frame)
     #print(dir(frame))
     frame.data = "derp"
-    print(frame)
+    return frame
