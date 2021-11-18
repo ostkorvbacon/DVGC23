@@ -1,4 +1,3 @@
-#t
 from canlib import canlib, Frame
 from canlib.canlib import ChannelData
 from environment import transciever, receiver
