@@ -43,5 +43,5 @@ def test():
     tearDownChannel(channel0)
     tearDownChannel(channel1)
 
-if ___name__ == '__main__':
+if __name__ == '__main__':
     test()
