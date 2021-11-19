@@ -5,10 +5,12 @@ from canlib import canlib
  May be used when you want to inject faults in only one of the components
  connected to a bus with multiple components connected to it. 
 """
-def read(channel, func, frame = None, params = []):
+def read(channel, func = None, frame = None, params = []):
     while True:
         try:
-            if(frame is None):
+            if(func == None):
+                return channel.read()
+            elif(frame is None):
                 frame = channel.read()
             return func(frame, params)
         except (canlib.canNoMsg) as ex:
