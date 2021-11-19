@@ -1,6 +1,7 @@
 from . import transciever
 from faultfunctions import swap, duplicate, DelayFrames, corrupt
 
+"""Contains functions for demoing each of the faultinjection methods."""
 class Demo:
     def __init__(self, transceiver, receiver):
         self.transceiver = transceiver
@@ -23,7 +24,7 @@ class Demo:
         print("\n--------Demoing swap--------")
         self.demo_swap()
         self.receiver.receive()
-        
+
         print("-----Demoing duplicate------")
         self.demo_duplicate()
         self.receiver.receive()
