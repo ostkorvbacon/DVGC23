@@ -14,3 +14,4 @@ class Receiver:
             print(frame)
             print("\n")
             frame = CanReadFault.read(self.channel)
+        print("No more frames\n")

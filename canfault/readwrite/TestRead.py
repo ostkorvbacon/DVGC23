@@ -32,16 +32,17 @@ def test():
     channel1 = setUpChannel(1)
     print("Writing frame!")
     frame = Frame(
-        id_=100,
-        data=[1, 2, 3, 4, 255, 6, 7, 8],
+        id_=562,
+        data=[255, 255, 40, 255, 255],
         flags=canlib.MessageFlag.EXT
     )
     CanWriteFault.write(channel1, do_nothing, frame)
     print("Reading on channel!")
     msg = CanReadFault.read(channel0, do_nothing, params = ["Hej", "hejsan"])
     print(msg)
+    print(frame.data[2])
     tearDownChannel(channel0)
     tearDownChannel(channel1)
 
-if ___name__ == '__main__':
+if __name__ == '__main__':
     test()
