@@ -10,7 +10,7 @@ def set_stored(frame):
         _stored = 1
         return None
 
-def swap(frame, params):
+def swap(frame, params = []):
     if(set_stored is None):
         return set_stored(frame)
     else:
