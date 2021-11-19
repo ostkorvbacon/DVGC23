@@ -1,6 +1,7 @@
 from canlib import canlib, Frame
 import random
 
+"""Class for creating and returning frames with randomized IDs and data"""
 class FrameFactory:
     def __init__(self):
         self.min = 0

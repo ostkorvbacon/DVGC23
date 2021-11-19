@@ -3,6 +3,7 @@ from readwrite import CanReadFault
 from canlib import Frame
 from . import printframe
 
+"""Handles the reception of messages on the supplied channel"""
 class Receiver:
     def __init__(self, channel):
         self.channel = channel
