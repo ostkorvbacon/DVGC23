@@ -10,11 +10,12 @@ def read(channel, func = None, frame = None, params = []):
         try:
             if(func == None):
                 return channel.read()
-            elif(frame is None):
+            elif(frame == None):
                 frame = channel.read()
             return func(frame, params)
             break
         except (canlib.canNoMsg) as ex:
+            return None
             pass
         except (canlib.canError) as ex:
             print(ex)

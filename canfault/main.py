@@ -20,7 +20,7 @@ def tearDownChannel(ch):
     ch.close()
 
 if __name__ == '__main__':
-
+    
     channel_transmit = setUpChannel(channel=0)
     channel_receive = setUpChannel(channel = 1)
 
@@ -28,7 +28,7 @@ if __name__ == '__main__':
     receiver = receiver.Receiver(channel_receive)
 
     transceiver.transmit()
-    #receiver.receive()
+    receiver.receive()
 
     tearDownChannel(channel_transmit)
     tearDownChannel(channel_receive)
