@@ -4,7 +4,7 @@ from canlib.canlib import ChannelData
 
 import CanReadFault
 import CanWriteFault
-from faultfunctions.swap import *
+#from faultfunctions.swap import swap
 
 def do_nothing(frame, params):
     return frame
@@ -26,7 +26,7 @@ def tearDownChannel(ch):
     ch.busOff()
     ch.close()
 
-def main():
+def test():
     print("Setting up channel!")
     channel0 = setUpChannel()
     channel1 = setUpChannel(1)
@@ -43,5 +43,5 @@ def main():
     tearDownChannel(channel0)
     tearDownChannel(channel1)
 
-
-main()
+if ___name__ == '__main__':
+    test()
