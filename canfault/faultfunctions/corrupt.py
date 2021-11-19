@@ -1,6 +1,6 @@
 from canlib import canlib, Frame
 from canlib.canlib import ChannelData
-from bitarray import bitarray
+#from bitarray import bitarray
 
 def access_bit(data, num):
     base = int(num // 8)
