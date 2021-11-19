@@ -11,7 +11,7 @@ def set_stored(frame):
         return None
 
 def swap(frame, params):
-    if(set_stored is None)
+    if(set_stored is None):
         return set_stored(frame)
     else:
         return set_stored(frame), frame

@@ -13,7 +13,6 @@ def read(channel, func = None, frame = None, params = []):
             elif(frame == None):
                 frame = channel.read()
             return func(frame, params)
-            break
         except (canlib.canNoMsg) as ex:
             return None
             pass
