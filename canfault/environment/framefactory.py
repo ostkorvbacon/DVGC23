@@ -2,7 +2,7 @@ from canlib import canlib, Frame
 import random
 
 class FrameFactory:
-    def __init__(self, min_value = 0, max_value = 256):
+    def __init__(self, min_value = 0, max_value = 255):
         self.min = min_value
         self.max = max_value
         self.data_amount = 8
