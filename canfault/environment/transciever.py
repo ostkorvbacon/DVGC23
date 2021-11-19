@@ -9,17 +9,9 @@ class Transceiver:
         self.factory = framefactory.FrameFactory()
 
     """Transmit a random frame over the channel"""
-    def transmit(self):
+    def transmit(self, func):
         frame = self.factory.create_random_frame()
-        #print("Frame being transmitted:")
-        #printframe.print_frame(frame)
-        #CanWriteFault.write(self.channel, duplicate.duplicate, frame)
-
-        frame2 = self.factory.create_random_frame()
-        print("Frame being transmitted:")
+        print("Transmitting:")
         printframe.print_frame(frame)
-        CanWriteFault.write(self.channel, swap.swap, frame)
-        print("Frame being transmitted:")
-        printframe.print_frame(frame2)
-        CanWriteFault.write(self.channel, swap.swap, frame2)
+        CanWriteFault.write(self.channel, func, frame)
 
