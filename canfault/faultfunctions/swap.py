@@ -6,15 +6,17 @@ def set_stored(frame):
     global _frame
     if(_stored == 1):
         _stored = 0
-        return _frame
+        ret = _frame
+        _frame = None
+        return ret, 1
     else:
         _frame = frame
         _stored = 1
-        return None
+        return None, 0
 
 def swap(frame, params = []):
-    old_frame = set_stored(frame)
-    if(old_frame is not None):
+    old_frame, stored = set_stored(frame)
+    if(stored == 1):
         return [frame, old_frame]
     else:
         return old_frame
