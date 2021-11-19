@@ -14,10 +14,10 @@ def corrupt_frame(frame, params = []):
     temp = [access_bit(frame.data,i) for i in range(len(frame.data)*8)]
     print(temp)
 
-    temp3 = bytes(frame.data)
-    temp2 = bitarray(endian='big')
+    #temp3 = bytes(frame.data)
+    #temp2 = bitarray(endian='big')
     temp2.frombytes(temp3)
     print(temp2)
-    bitarray.invert(temp2)
+    #bitarray.invert(temp2)
     print("invertetd", format(temp2))
     return frame
