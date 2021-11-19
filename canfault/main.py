@@ -1,6 +1,6 @@
 from canlib import canlib, Frame
 from canlib.canlib import ChannelData
-from environment import transciever, receiver
+from environment import transciever, receiver, demo
 
 def setUpChannel(channel=0,
                  openFlags=canlib.canOPEN_ACCEPT_VIRTUAL,
@@ -26,9 +26,9 @@ if __name__ == '__main__':
 
     transceiver = transciever.Transceiver(channel_transmit)
     receiver = receiver.Receiver(channel_receive)
-
-    transceiver.transmit()
-    receiver.receive()
+    demo = demo.Demo(transceiver, receiver)
+    
+    demo.demo_all()
 
     tearDownChannel(channel_transmit)
     tearDownChannel(channel_receive)
