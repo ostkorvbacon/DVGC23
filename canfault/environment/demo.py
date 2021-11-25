@@ -30,4 +30,8 @@ class Demo:
             self.demo_duplicate()
             self.receiver.receive()
 
+            print("-----Demoing corrupt------")
+            self.demo_corrupt()
+            self.receiver.receive()
+
             print("----------End demo----------\n")
