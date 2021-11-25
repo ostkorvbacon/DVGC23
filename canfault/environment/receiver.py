@@ -6,9 +6,10 @@ from . import printframe
 """Handles the reception of messages on the supplied channel"""
 class Receiver:
     def __init__(self, channel):
-        if isinstance(canlib.canlib.channel.Channel, type(channel)):
+        if not isinstance(channel, canlib.canlib.channel.Channel):
             raise(TypeError("Object passed to receiver must be a canlib channel"))
-        self.channel = channel
+        else:
+            self.channel = channel
 
     """Print the content of the frame"""
     def receive(self):
