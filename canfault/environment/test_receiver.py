@@ -22,7 +22,7 @@ class TestReceiver(unittest.TestCase):
         self.ch1.busOff()
         self.ch1.close()
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     import framefactory
     import receiver
 
