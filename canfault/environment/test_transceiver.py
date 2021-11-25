@@ -1,9 +1,11 @@
 import unittest
-import transciever
+from . import transciever
+from main import setUpChannel
 
 class TestTransceiver(unittest.TestCase):
     def setUp(self) -> None:
-        self.transceiver = transciever.Transceiver
+        self.ch = setUpChannel()
+        self.transceiver = transciever.Transceiver(self.ch)
 
     def test_transmit(self):
         self.transceiver.transmit()

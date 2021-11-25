@@ -13,5 +13,5 @@ class Transceiver:
         frame = self.factory.create_random_frame()
         print("Transmitting:")
         printframe.print_frame(frame)
-        CanWriteFault.write(self.channel, func, frame, params)
+        CanWriteFault.write(self.channel, frame, func, params)
 

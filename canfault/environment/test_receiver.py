@@ -1,25 +1,27 @@
 import unittest
-from canfault.environment import framefactory
-import receiver
+from . import framefactory
+from . import receiver
 from canlib import canlib
+from main import setUpChannel
 
 class TestReceiver(unittest.TestCase):
     def setUp(self) -> None:
-        self.receiver = receiver.Receiver
-        self.framefactory = framefactory.FrameFactory
+        self.ch = setUpChannel()
+        self.ch1 = setUpChannel()
+        self.receiver = receiver.Receiver(self.ch1)
+        self.framefactory = framefactory.FrameFactory()
 
     def test_receive(self):
         self.assertIsNotNone(self.receiver)
     
     def test_receiver(self):
-        ch = canlib.openChannel(channel= 0, openFlags = canlib.canOPEN_ACCEPT_VIRTUAL)
-        ch.setBusOutputControl(canlib.canDRIVER_NORMAL)
-        ch.setBusParams(canlib.canBITRATE_500K)
-        ch.busOn()
-        ch.write(self.framefactory.create_random_frame())
+        
+        self.ch.write(self.framefactory.create_random_frame())
         self.receiver.receive()
-        ch.busOff()
-        ch.close()
+        self.ch.busOff()
+        self.ch.close()
+        self.ch1.busOff()
+        self.ch1.close()
 
 if __name__ == '__main__':
     unittest.main()
