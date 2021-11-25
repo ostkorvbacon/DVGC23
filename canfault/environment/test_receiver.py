@@ -25,6 +25,19 @@ class TestReceiver(unittest.TestCase):
 if __name__ == '__main__':
     import framefactory
     import receiver
+
+    def setUpChannel():
+        def setUpChannel(channel=0,
+                 openFlags=canlib.canOPEN_ACCEPT_VIRTUAL,
+                 bitrate=canlib.canBITRATE_500K,
+                 bitrateFlags=canlib.canDRIVER_NORMAL):
+
+            ch = canlib.openChannel(channel, openFlags)
+            ch.setBusOutputControl(bitrateFlags)
+            ch.setBusParams(bitrate)
+            ch.busOn()
+            return ch
+
     unittest.main()
 else:
     from environment import framefactory
