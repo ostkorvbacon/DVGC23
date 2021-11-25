@@ -9,7 +9,7 @@ class TestTransceiver(unittest.TestCase):
     def test_transmit(self):
         self.transceiver.transmit()
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     import transciever
     unittest.main()
 else:

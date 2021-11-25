@@ -1,5 +1,4 @@
 import unittest
-from environment import framefactory
 
 class TestFrameFactory(unittest.TestCase):
     def setUp(self) -> None:
@@ -11,5 +10,8 @@ class TestFrameFactory(unittest.TestCase):
     def test_create_frames(self):
         self.assertIsNotNone(self.framefactory.create_frames(2))
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
+    import framefactory
     unittest.main()
+else:
+    from environment import framefactory
