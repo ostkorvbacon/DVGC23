@@ -11,8 +11,6 @@ def setUpChannel(channel=0,
         bitrateFlags=canlib.canDRIVER_NORMAL):
 
     ch = canlib.openChannel(channel, openFlags)
-    print("Using channel: %s, EAN: %s" % (ChannelData(channel).channel_name,
-                                          ChannelData(channel).card_upc_no))
     ch.setBusOutputControl(bitrateFlags)
     ch.setBusParams(bitrate)
     ch.busOn()
@@ -21,6 +19,11 @@ def setUpChannel(channel=0,
 def tearDownChannel(ch):
     ch.busOff()
     ch.close()
+
+def reset(ch):
+    frame = read(ch)
+    while frame is not None:
+        frame = read(ch)
 
 class TestRead(unittest.TestCase):
     
@@ -37,6 +40,7 @@ class TestRead(unittest.TestCase):
             data=[1],
             flags=canlib.MessageFlag.EXT
         )
+        reset(self.channel_read)
 
     def tearDown(self):
         tearDownChannel(self.channel_read)
