@@ -58,7 +58,7 @@ class TestSwap(unittest.TestCase):
         self.assertIsNone(ret2_frame[0])
 
 
-if __name__ == '__main__':
+if __name__ == '__main__': # pragma: no cover
     from swap import swap
     unittest.main()
 else:

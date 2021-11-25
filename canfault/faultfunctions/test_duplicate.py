@@ -1,5 +1,5 @@
 import unittest
-from duplicate import duplicate
+from faultfunctions.duplicate import duplicate
 from canlib import canlib, Frame
 class TestDuplicate(unittest.TestCase):
     
