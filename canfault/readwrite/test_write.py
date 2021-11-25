@@ -70,7 +70,7 @@ class TestWrite(unittest.TestCase):
     def test_write_params(self):
         write(self.channel_write, self.frame1, add, [5])
         ret_frame = self.channel_read.read()
-        self.assertEqual(ret_frame.data[0], self.frame1.data[0] + 5)
+        self.assertEqual(ret_frame.data[0], 5)
 
     
 
