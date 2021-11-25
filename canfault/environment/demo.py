@@ -20,13 +20,14 @@ class Demo:
     def demo_delay(self):
         self.transceiver.transmit(DelayFrames.DelayFrames)
 
-    def demo_all(self):
-        print("\n--------Demoing swap--------")
-        self.demo_swap()
-        self.receiver.receive()
+    def demo_all(self, iterations):
+        for i in range(0, iterations):
+            print("\n--------Demoing swap--------")
+            self.demo_swap()
+            self.receiver.receive()
 
-        print("-----Demoing duplicate------")
-        self.demo_duplicate()
-        self.receiver.receive()
+            print("-----Demoing duplicate------")
+            self.demo_duplicate()
+            self.receiver.receive()
 
-        print("----------End demo----------\n")
+            print("----------End demo----------\n")
