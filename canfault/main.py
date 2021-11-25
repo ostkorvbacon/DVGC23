@@ -8,8 +8,6 @@ def setUpChannel(channel=0,
                  bitrateFlags=canlib.canDRIVER_NORMAL):
 
     ch = canlib.openChannel(channel, openFlags)
-    print("Using channel: %s, EAN: %s" % (ChannelData(channel).channel_name,
-                                          ChannelData(channel).card_upc_no))
     ch.setBusOutputControl(bitrateFlags)
     ch.setBusParams(bitrate)
     ch.busOn()
