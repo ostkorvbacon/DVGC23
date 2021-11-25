@@ -9,9 +9,9 @@ class Transceiver:
         self.factory = framefactory.FrameFactory()
 
     """Transmit a random frame over the channel, optionally supply faultfunction"""
-    def transmit(self, func = None):
+    def transmit(self, func = None, params = []):
         frame = self.factory.create_random_frame()
         print("Transmitting:")
         printframe.print_frame(frame)
-        CanWriteFault.write(self.channel, func, frame)
+        CanWriteFault.write(self.channel, func, frame, params)
 

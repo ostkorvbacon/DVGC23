@@ -11,18 +11,19 @@ class FrameFactory:
     """Create a single frame with random ID and data"""
     def create_random_frame(self):
         random.seed() 
+        self.data_amount = random.randint(0, 8)
         data = []
         for i in range(0, self.data_amount):
            datapoint = random.randint(self.min, self.max)
            data.append(datapoint)
-        print("Creating frame with data: {}".format(data))
         frame = Frame(id_ = random.randint(0, 1023), data = data, flags = canlib.MessageFlag.EXT)
+
         return frame
 
     """Create a set of frames with random data and IDs returned as a list"""
     def create_frames(self, number_of_frames):
         frames = []
         for i in range(0, number_of_frames):
-            frames.append(self.create_random_frame(self))
+            frames.append(self.create_random_frame())
         
         return frames

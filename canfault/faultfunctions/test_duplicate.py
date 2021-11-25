@@ -16,5 +16,3 @@ class TestDuplicate(unittest.TestCase):
         f = duplicate(self.frame)
         g = [self.frame, self.frame]
         self.assertEqual(f,g)
-        
-
