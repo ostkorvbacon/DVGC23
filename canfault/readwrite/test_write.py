@@ -1,10 +1,14 @@
 from canlib import canlib, Frame
 from canlib.canlib import ChannelData
-from CanWriteFault import write
 import unittest
 
 def do_nothing(frame, params):
     return frame
+
+def add(frame, nr):
+    fault_frame = frame
+    fault_frame.data[0] = fault_frame.data[0] + nr[0]
+    return fault_frame
 
 def setUpChannel(channel=0,
         openFlags=canlib.canOPEN_ACCEPT_VIRTUAL,
@@ -44,7 +48,7 @@ class TestWrite(unittest.TestCase):
         tearDownChannel(self.channel_write)
 
     def test_write(self):
-        write(self.channel_write, self.frame1)
+        write(self.channel_write, self.frame1, do_nothing)
         ret_frame = self.channel_read.read()
         self.assertEqual(ret_frame, self.frame1)
     
@@ -57,10 +61,23 @@ class TestWrite(unittest.TestCase):
     def test_write_int_as_frame(self):
         self.assertRaises(TypeError, write, self.channel_write, 1)
 
-    def test_write
+    def test_write_no_func(self):
+        write(self.channel_write, self.frame1)
+        ret_frame = self.channel_read.read()
+        self.assertEqual(ret_frame, self.frame1)
+
+    def test_write_int_array_as_frame(self):
+        self.assertRaises(TypeError, write, self.channel_write, [self.frame1, 1])
+    
+    def test_write_params(self):
+        write(self.channel_write, self.frame1, add, [5])
+        ret_frame = self.channel_read.read()
+        self.assertEqual(ret_frame.data[0], self.frame1.data[0] + 5)
 
     
 
-    
 if __name__ == '__main__':
+    from CanWriteFault import write
     unittest.main()
+else:
+    from readwrite.CanWriteFault import write

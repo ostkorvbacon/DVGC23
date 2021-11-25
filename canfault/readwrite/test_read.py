@@ -1,7 +1,6 @@
+import unittest
 from canlib import canlib, Frame
 from canlib.canlib import ChannelData
-from CanReadFault import read
-import unittest
 
 def do_nothing(frame, params):
     return frame
@@ -67,4 +66,7 @@ class TestRead(unittest.TestCase):
 
     
 if __name__ == '__main__':
+    from CanReadFault import read
     unittest.main()
+else:
+    from readwrite.CanReadFault import read

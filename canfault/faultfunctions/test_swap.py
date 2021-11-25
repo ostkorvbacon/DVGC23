@@ -1,6 +1,5 @@
 import unittest
 from canlib import canlib, Frame
-from swap import swap
 
 class TestSwap(unittest.TestCase):
 
@@ -60,4 +59,7 @@ class TestSwap(unittest.TestCase):
 
 
 if __name__ == '__main__':
+    from swap import swap
     unittest.main()
+else:
+    from faultfunctions.swap import swap
