@@ -8,6 +8,8 @@ from canlib import canlib, Frame
 def read(channel, func = None, frame = None, params = []):
     if(frame is not None and not isinstance(frame, Frame)):
         raise TypeError("The passed frame is not a canlib Frame!")
+    if(not isinstance(channel, canlib.channel.Channel)):
+        raise TypeError("The passed frame is not a canlib Frame!")
     while True:
         try:
             if(frame is None):

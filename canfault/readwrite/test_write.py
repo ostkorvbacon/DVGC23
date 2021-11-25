@@ -71,6 +71,9 @@ class TestWrite(unittest.TestCase):
         write(self.channel_write, self.frame1, add, [5])
         ret_frame = self.channel_read.read()
         self.assertEqual(ret_frame.data[0], 5)
+    
+    def test_write_int_as_channel(self):
+        self.assertRaises(TypeError, write, 1, self.frame1)
 
     
 
