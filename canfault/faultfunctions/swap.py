@@ -21,18 +21,4 @@ def swap(frame, params = []):
     else:
         return old_frame
 
-if __name__ == '__main__':
-    from canlib import canlib, Frame
-    frame1 = Frame(
-        id_=0,
-        data=[0],
-        flags=canlib.MessageFlag.EXT
-    )
-    frame2 = Frame(
-        id_=1,
-        data=[1],
-        flags=canlib.MessageFlag.EXT
-    )
-    print(swap(frame1))
-    print(swap(frame2))
     

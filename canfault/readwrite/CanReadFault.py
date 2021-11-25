@@ -1,4 +1,4 @@
-from canlib import canlib
+from canlib import canlib, Frame
 
 """ Used to read from the bus if no frame is supplied.
  Used to pretend to read a frame from the bus if a frame is supplied.
@@ -6,17 +6,17 @@ from canlib import canlib
  connected to a bus with multiple components connected to it. 
 """
 def read(channel, func = None, frame = None, params = []):
+    if(frame is not None and not isinstance(frame, Frame)):
+        raise TypeError("The passed frame is not a canlib Frame!")
     while True:
         try:
-            if(func == None):
-                return channel.read()
-            elif(frame == None):
+            if(frame is None):
                 frame = channel.read()
+            if(func is None):
+                return frame
             return func(frame, params)
         except (canlib.canNoMsg) as ex:
             return None
-            pass
-        except (canlib.canError) as ex:
-            print(ex)
+    
 
             
