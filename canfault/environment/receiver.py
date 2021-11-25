@@ -6,6 +6,8 @@ from . import printframe
 """Handles the reception of messages on the supplied channel"""
 class Receiver:
     def __init__(self, channel):
+        if isinstance(canlib.canlib.channel.Channel, type(channel)):
+            raise(TypeError("Object passed to receiver must be a canlib channel"))
         self.channel = channel
 
     """Print the content of the frame"""
@@ -13,6 +15,6 @@ class Receiver:
         frame = CanReadFault.read(self.channel)
         while frame is not None:
             print("Receiving:")
-            printframe. print_frame(frame)
+            printframe.print_frame(frame)
             frame = CanReadFault.read(self.channel)
         print("No more frames\n")
