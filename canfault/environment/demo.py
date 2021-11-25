@@ -20,7 +20,7 @@ class Demo:
     def demo_delay(self):
         self.transceiver.transmit(DelayFrames.DelayFrames)
 
-    def demo_all(self, iterations):
+    def demo_all(self, iterations = 1):
         for i in range(0, iterations):
             print("\n--------Demoing swap--------")
             self.demo_swap()
