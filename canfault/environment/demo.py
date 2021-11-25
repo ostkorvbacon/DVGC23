@@ -31,16 +31,8 @@ class Demo:
             self.demo_duplicate()
             self.receiver.receive()
 
-<<<<<<< HEAD
-        print("-----Demoing corrupt------")
-        self.demo_corrupt()
-        self.receiver.receive()
-
-        print("----------End demo----------\n")
-=======
             print("-----Demoing corrupt------")
             self.demo_corrupt()
             self.receiver.receive()
 
             print("----------End demo----------\n")
->>>>>>> 3e8c8572417a82ee364a8a7650798b543652bfc7
