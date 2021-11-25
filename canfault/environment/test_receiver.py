@@ -1,6 +1,5 @@
 import unittest
-from . import framefactory
-from . import receiver
+
 from canlib import canlib
 from main import setUpChannel
 
@@ -24,4 +23,9 @@ class TestReceiver(unittest.TestCase):
         self.ch1.close()
 
 if __name__ == '__main__':
+    import framefactory
+    import receiver
     unittest.main()
+else:
+    from environment import framefactory
+    from environment import receiver

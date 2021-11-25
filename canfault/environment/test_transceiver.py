@@ -1,5 +1,4 @@
 import unittest
-from . import transciever
 from main import setUpChannel
 
 class TestTransceiver(unittest.TestCase):
@@ -11,4 +10,7 @@ class TestTransceiver(unittest.TestCase):
         self.transceiver.transmit()
 
 if __name__ == '__main__':
+    import transciever
     unittest.main()
+else:
+    from environment import transciever
