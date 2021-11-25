@@ -1,9 +1,9 @@
 import unittest
-import framefactory
+from environment import framefactory
 
 class TestFrameFactory(unittest.TestCase):
     def setUp(self) -> None:
-        self.framefactory = framefactory.FrameFactory
+        self.framefactory = framefactory.FrameFactory()
 
     def test_create_random_frame(self):
         self.assertIsNotNone(self.framefactory.create_random_frame())

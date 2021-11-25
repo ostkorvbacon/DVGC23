@@ -24,6 +24,6 @@ class FrameFactory:
     def create_frames(self, number_of_frames):
         frames = []
         for i in range(0, number_of_frames):
-            frames.append(self.create_random_frame(self))
+            frames.append(self.create_random_frame())
         
         return frames
