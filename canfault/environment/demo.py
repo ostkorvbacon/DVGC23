@@ -15,7 +15,8 @@ class Demo:
         self.transceiver.transmit(duplicate.duplicate)
 
     def demo_corrupt(self):
-        self.transceiver.transmit(corrupt.corrupt)
+        params = [3, 10]
+        self.transceiver.transmit(corrupt.corrupt, params)
 
     def demo_delay(self):
         self.transceiver.transmit(DelayFrames.DelayFrames)
@@ -27,6 +28,10 @@ class Demo:
 
         print("-----Demoing duplicate------")
         self.demo_duplicate()
+        self.receiver.receive()
+
+        print("-----Demoing corrupt------")
+        self.demo_corrupt()
         self.receiver.receive()
 
         print("----------End demo----------\n")
