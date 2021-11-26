@@ -2,7 +2,7 @@ from canlib import Frame
 
 """Print a frame formatted for easy reading"""
 def print_frame(frame):
-    if not type(frame) is Frame:
+    if not isinstance(frame, Frame):
         raise TypeError("print_frame requires type Frame")
     else:
         print("id_ = {}".format(frame.id))

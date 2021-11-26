@@ -66,6 +66,9 @@ class TestRead(unittest.TestCase):
     def test_read_int_as_frame(self):
         self.assertRaises(TypeError, read, self.channel_read, frame = 1)
 
+    def test_read_int_as_channel(self):
+        self.assertRaises(TypeError, read, 1, self.frame1)
+
     
 
     

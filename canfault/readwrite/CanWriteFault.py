@@ -1,4 +1,4 @@
-from canlib import Frame
+from canlib import canlib, Frame
 
 def write(channel, frame, func = None, params = []):
     if(not isinstance(frame, Frame)):
@@ -8,7 +8,8 @@ def write(channel, frame, func = None, params = []):
             for single_frame in frame:
                 if(not isinstance(single_frame, Frame)):
                     raise TypeError("The passed frame is not a canlib Frame!")
-            
+    if(not isinstance(channel, canlib.channel.Channel)):
+        raise TypeError("The passed frame is not a canlib Frame!")
     if(func is None):
         frame_fault = frame
     else:
