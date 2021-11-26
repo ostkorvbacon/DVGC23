@@ -78,7 +78,7 @@ class TestWrite(unittest.TestCase):
     
 
 if __name__ == '__main__': # pragma: no cover
-    from CanWriteFault import write
+    from writefault import write
     unittest.main()
 else:
-    from readwrite.CanWriteFault import write
+    from readwrite.writefault import write

@@ -1,5 +1,5 @@
 import canlib
-from readwrite import CanReadFault
+from readwrite import readfault
 from canlib import Frame
 from . import printframe
 
@@ -13,9 +13,9 @@ class Receiver:
 
     """Print the content of the frame"""
     def receive(self):
-        frame = CanReadFault.read(self.channel)
+        frame = readfault.read(self.channel)
         while frame is not None:
             print("Receiving:")
             printframe.print_frame(frame)
-            frame = CanReadFault.read(self.channel)
+            frame = readfault.read(self.channel)
         print("No more frames\n")

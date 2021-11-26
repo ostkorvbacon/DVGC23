@@ -1,5 +1,5 @@
 from . import transciever
-from faultfunctions import swap, duplicate, DelayFrames, corrupt
+from faultfunctions import swap, duplicate, delay, corrupt
 
 """Contains functions for demoing each of the faultinjection methods."""
 class Demo:
