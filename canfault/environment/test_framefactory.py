@@ -9,6 +9,9 @@ class TestFrameFactory(unittest.TestCase):
 
     def test_create_frames(self):
         self.assertIsNotNone(self.framefactory.create_frames(2))
+    
+    def test_create_frames_input(self):
+        self.assertRaises(TypeError, self.framefactory.create_frames, "NNNNNNNN")
 
 if __name__ == '__main__':  # pragma: no cover
     import framefactory

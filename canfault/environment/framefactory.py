@@ -22,6 +22,8 @@ class FrameFactory:
 
     """Create a set of frames with random data and IDs returned as a list"""
     def create_frames(self, number_of_frames):
+        if not isinstance(number_of_frames, int):
+            raise(TypeError("number_of_frames needs to be an int"))
         frames = []
         for i in range(0, number_of_frames):
             frames.append(self.create_random_frame())
