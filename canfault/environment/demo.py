@@ -1,3 +1,4 @@
+import time
 from . import transciever
 from faultfunctions import swap, duplicate, delay, corrupt
 
@@ -19,6 +20,7 @@ class Demo:
         self.transceiver.transmit(corrupt.corrupt, params)
 
     def demo_write_delay(self):
+        print("Transmitting at time: {}".format(time.time()))
         self.transceiver.transmit(delay.delay)
 
     def demo_read_swap(self):
@@ -34,6 +36,7 @@ class Demo:
 
     def demo_read_delay(self):
         self.receiver.receive(delay.delay)
+        print("Received at time: {}".format(time.time()))
 
     def demo_all(self, iterations = 1):
         for i in range(0, iterations):
@@ -55,6 +58,7 @@ class Demo:
 
             print("-----------Delay------------")
             self.demo_write_corrupt()
+            print("Received at time: {}".format(time.time()))
             self.receiver.receive()
 
             print("\n--------------------------------------------------------------------------------")
@@ -74,6 +78,7 @@ class Demo:
             self.demo_read_corrupt()
 
             print("-----------Delay------------")
+            print("Transmitting at time: {}".format(time.time()))
             self.transceiver.transmit()
             self.demo_read_delay()
 
