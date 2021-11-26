@@ -13,22 +13,22 @@ class TestReceiver(unittest.TestCase):
     def test_receive(self):
         self.assertIsNotNone(self.receiver)
     
-    def test_receiver_correct(self):
+    def test_correct(self):
         self.ch.write(self.framefactory.create_random_frame())
         self.receiver.receive()
     
-    def test_receiver_correct_duplicate(self):
+    def test_correct_duplicate(self):
         self.ch.write(self.framefactory.create_random_frame())
         self.receiver.receive(func = duplicate) 
     
-    def test_receiver_init(self):
+    def test_init(self):
         fault = "INCORRECT"
         self.assertRaises(TypeError, receiver.Receiver, fault)
 
-    def test_receiver_faulty_arguments_func(self):
+    def test_faulty_arguments_func(self):
         self.assertRaises(TypeError, self.receiver.receive, func = [1, "hej"])
 
-    def test_receiver_faulty_arguments_params(self):
+    def test_faulty_arguments_params(self):
         self.assertRaises(TypeError, self.receiver.receive, params = 1)
 
     def tearDown(self) -> None:
