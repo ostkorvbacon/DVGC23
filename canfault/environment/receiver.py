@@ -23,4 +23,3 @@ class Receiver:
             else:
                 printframe.print_frame(frame)
             frame = readfault.read(channel=self.channel, func=func, params=params)
-        print("No more frames\n")

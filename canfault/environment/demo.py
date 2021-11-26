@@ -33,45 +33,48 @@ class Demo:
         self.receiver.receive(corrupt.corrupt, params)
 
     def demo_read_delay(self):
-        self.transceiver.transmit(delay.delay)
+        self.receiver.receive(delay.delay)
 
     def demo_all(self, iterations = 1):
         for i in range(0, iterations):
-            print("\n____________________________")
+            print("\n________________________________________Start demo________________________________________")
+            print("\n--------------------------------------------------------------------------------")
             print("Faults on write:")
-            print("\n--------Demoing swap--------")
+            print("--------------------------------------------------------------------------------")
+            print("\n-------------Swap------------")
             self.demo_write_swap()
             self.receiver.receive()
 
-            print("-----Demoing duplicate------")
+            print("----------Duplicate-----------")
             self.demo_write_duplicate()
             self.receiver.receive()
 
-            print("------Demoing corrupt-------")
+            print("-----------Corrupt------------")
             self.demo_write_corrupt()
             self.receiver.receive()
 
-            print("-------Demoing delay--------")
+            print("-----------Delay------------")
             self.demo_write_corrupt()
             self.receiver.receive()
 
-            print("\n____________________________")
+            print("\n--------------------------------------------------------------------------------")
             print("Faults on read:")
-            print("\n--------Demoing swap--------")
+            print("--------------------------------------------------------------------------------")
+            print("\n------------Swap------------")
             self.transceiver.transmit()
             self.transceiver.transmit()
             self.demo_read_swap()
 
-            print("-----Demoing duplicate------")
+            print("---------Duplicate-----------")
             self.transceiver.transmit()
             self.demo_read_duplicate()
 
-            print("------Demoing corrupt-------")
+            print("----------Corrupt-----------")
             self.transceiver.transmit()
             self.demo_read_corrupt()
 
-            print("-------Demoing delay--------")
+            print("-----------Delay------------")
             self.transceiver.transmit()
-            self.demo_read_corrupt()
+            self.demo_read_delay()
 
-            print("----------End demo----------\n")
+            print("_________________________________________End demo_________________________________________\n")
