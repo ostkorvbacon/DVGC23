@@ -24,11 +24,11 @@ def corrupt(frame, params = []):
             while frame_as_bits.count(0) + frame_as_bits.count(1) < 64:
                 frame_as_bits.extend(bit_filler)
 
-        print("Normal   ", format(frame_as_bits))
+        #print("Normal   ", format(frame_as_bits))
         for i in range(start, lenght):
             bitarray.invert(frame_as_bits, i)
 
-        print("invertetd", format(frame_as_bits))
+        #print("invertetd", format(frame_as_bits))
         frame_as_bytes = frame_as_bits.tobytes()
         frame.data = frame_as_bytes
     return frame
