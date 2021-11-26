@@ -1,5 +1,5 @@
 from faultfunctions import duplicate, swap
-from readwrite import CanWriteFault
+from readwrite import writefault
 from . import framefactory
 from . import printframe
 
@@ -13,5 +13,5 @@ class Transceiver:
         frame = self.factory.create_random_frame()
         print("Transmitting:")
         printframe.print_frame(frame)
-        CanWriteFault.write(self.channel, frame, func, params)
+        writefault.write(self.channel, frame, func, params)
 

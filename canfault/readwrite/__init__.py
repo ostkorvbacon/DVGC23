@@ -1,2 +1,2 @@
-from . import CanReadFault
-from . import CanWriteFault
+from . import readfault
+from . import writefault

@@ -1,5 +1,6 @@
+from typing import List
 import canlib
-from readwrite import CanReadFault
+from readwrite import readfault
 from canlib import Frame
 from . import printframe
 
@@ -12,10 +13,13 @@ class Receiver:
             self.channel = channel
 
     """Print the content of the frame"""
-    def receive(self):
-        frame = CanReadFault.read(self.channel)
+    def receive(self, func = None, params = []):
+        frame = readfault.read(channel=self.channel, func=func, params=params)
         while frame is not None:
             print("Receiving:")
-            printframe.print_frame(frame)
-            frame = CanReadFault.read(self.channel)
-        print("No more frames\n")
+            if isinstance(frame, List):
+                for i in frame:
+                    printframe.print_frame(i)
+            else:
+                printframe.print_frame(frame)
+            frame = readfault.read(channel=self.channel, func=func, params=params)

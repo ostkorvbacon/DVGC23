@@ -73,7 +73,7 @@ class TestRead(unittest.TestCase):
 
     
 if __name__ == '__main__': # pragma: no cover
-    from CanReadFault import read
+    from readfault import read
     unittest.main()
 else:
-    from readwrite.CanReadFault import read
+    from readwrite.readfault import read
