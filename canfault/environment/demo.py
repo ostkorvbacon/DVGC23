@@ -21,21 +21,21 @@ class Demo:
 
     def demo_write_delay(self):
         print("Transmitting at time: {}".format(time.time()))
-        self.transceiver.transmit(delay.delay)
+        self.transceiver.transmit(func = delay.delay, params = [1])
 
     def demo_read_swap(self):
         self.receiver.receive(swap.swap)
         self.receiver.receive(swap.swap)
 
     def demo_read_duplicate(self):
-        self.receiver.receive(func=duplicate.duplicate, params = [1])
+        self.receiver.receive(func=duplicate.duplicate)
 
     def demo_read_corrupt(self):
         params = [3, 10]
         self.receiver.receive(corrupt.corrupt, params)
 
     def demo_read_delay(self):
-        self.receiver.receive(delay.delay)
+        self.receiver.receive(func = delay.delay, params = [1])
         print("Received at time: {}".format(time.time()))
 
     def demo_all(self, iterations = 1):
