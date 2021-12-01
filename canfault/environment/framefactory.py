@@ -25,7 +25,7 @@ class FrameFactory:
         if not isinstance(number_of_frames, int):
             raise(TypeError("number_of_frames needs to be an int"))
         frames = []
-        for i in range(0, number_of_frames):
+        for _ in range(number_of_frames):
             frames.append(self.create_random_frame())
         
         return frames
