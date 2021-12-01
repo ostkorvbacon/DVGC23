@@ -57,7 +57,7 @@ class Demo:
             self.receiver.receive()
 
             print("-----------Delay------------")
-            self.demo_write_corrupt()
+            self.demo_write_delay()
             print("Received at time: {}".format(time.time()))
             self.receiver.receive()
 
