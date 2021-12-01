@@ -10,10 +10,9 @@ class FrameFactory:
 
     """Create a single frame with random ID and data"""
     def create_random_frame(self):
-        random.seed() 
-        self.data_amount = random.randint(3, 8)
+        random.seed()
         data = []
-        for i in range(0, self.data_amount):
+        for _ in range(self.data_amount):
            datapoint = random.randint(self.min, self.max)
            data.append(datapoint)
         frame = Frame(id_ = random.randint(0, 1023), data = data, flags = canlib.MessageFlag.EXT)
@@ -25,7 +24,7 @@ class FrameFactory:
         if not isinstance(number_of_frames, int):
             raise(TypeError("number_of_frames needs to be an int"))
         frames = []
-        for i in range(0, number_of_frames):
+        for _ in range(number_of_frames):
             frames.append(self.create_random_frame())
         
         return frames
