@@ -1,5 +1,5 @@
 import unittest
-from faultfunctions.duplicate import duplicate
+from faultfunctions import faultfunction
 from canlib import canlib, Frame
 class TestDuplicate(unittest.TestCase):
     
@@ -10,9 +10,9 @@ class TestDuplicate(unittest.TestCase):
         pass
 
     def test_duplicate(self):
-        f = duplicate(2)
+        f = faultfunction.duplicate(2)
         g = [2,2]
         self.assertEqual(f,g)
-        f = duplicate(self.frame)
+        f = faultfunction.duplicate(self.frame)
         g = [self.frame, self.frame]
         self.assertEqual(f,g)

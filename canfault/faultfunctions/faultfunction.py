@@ -2,7 +2,7 @@ from canlib import canlib, Frame
 from canlib.canlib import ChannelData
 from bitarray import bitarray
 from bitarray import util
-
+import time
 
 def corrupt(frame, params = []):
     start = params[0]
@@ -32,3 +32,37 @@ def corrupt(frame, params = []):
         frame_as_bytes = frame_as_bits.tobytes()
         frame.data = frame_as_bytes
     return frame
+
+
+def delay(frame, params =[]): 
+    time.sleep(params[0])
+    return frame
+    
+    
+def duplicate(frame, params = []):
+    return [frame,frame]
+
+_frame = None
+_stored = 0
+
+def set_stored(frame):
+    global _stored
+    global _frame
+    if(_stored == 1):
+        _stored = 0
+        ret = _frame
+        _frame = None
+        return ret, 1
+    else:
+        _frame = frame
+        _stored = 1
+        return None, 0
+
+def swap(frame, params = []):
+    old_frame, stored = set_stored(frame)
+    if(stored == 1):
+        return [frame, old_frame]
+    else:
+        return old_frame
+
+    
