@@ -28,7 +28,7 @@ class Demo:
         self.receiver.receive(swap.swap)
 
     def demo_read_duplicate(self):
-        self.receiver.receive(duplicate.duplicate)
+        self.receiver.receive(func=duplicate.duplicate, params = [1])
 
     def demo_read_corrupt(self):
         params = [3, 10]
@@ -41,9 +41,9 @@ class Demo:
     def demo_all(self, iterations = 1):
         for i in range(0, iterations):
             print("\n________________________________________Start demo________________________________________")
-            print("\n--------------------------------------------------------------------------------")
+            print("\n------------------------------------------------------------------------------------------")
             print("Faults on write:")
-            print("--------------------------------------------------------------------------------")
+            print("------------------------------------------------------------------------------------------")
             print("\n-------------Swap------------")
             self.demo_write_swap()
             self.receiver.receive()
@@ -61,9 +61,9 @@ class Demo:
             print("Received at time: {}".format(time.time()))
             self.receiver.receive()
 
-            print("\n--------------------------------------------------------------------------------")
+            print("\n------------------------------------------------------------------------------------------")
             print("Faults on read:")
-            print("--------------------------------------------------------------------------------")
+            print("------------------------------------------------------------------------------------------")
             print("\n------------Swap------------")
             self.transceiver.transmit()
             self.transceiver.transmit()
