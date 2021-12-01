@@ -1,7 +1,7 @@
 import time
 from . import transciever
-from faultfunctions import swap, duplicate, delay, corrupt
-
+from faultfunctions import faultfunction
+#import faultfunction
 """Contains functions for demoing each of the faultinjection methods."""
 class Demo:
     def __init__(self, transceiver, receiver):
@@ -9,33 +9,33 @@ class Demo:
         self.receiver = receiver
 
     def demo_write_swap(self):
-        self.transceiver.transmit(swap.swap)
-        self.transceiver.transmit(swap.swap)
+        self.transceiver.transmit(faultfunction.swap)
+        self.transceiver.transmit(faultfunction.swap)
 
     def demo_write_duplicate(self):
-        self.transceiver.transmit(duplicate.duplicate)
+        self.transceiver.transmit(faultfunction.duplicate)
 
     def demo_write_corrupt(self):
         params = [3, 10]
-        self.transceiver.transmit(corrupt.corrupt, params)
+        self.transceiver.transmit(faultfunction.corrupt, params)
 
     def demo_write_delay(self):
         print("Transmitting at time: {}".format(time.time()))
-        self.transceiver.transmit(func = delay.delay, params = [1])
+        self.transceiver.transmit(func = faultfunction.delay, params = [1])
 
     def demo_read_swap(self):
-        self.receiver.receive(swap.swap)
-        self.receiver.receive(swap.swap)
+        self.receiver.receive(faultfunction.swap)
+        self.receiver.receive(faultfunction.swap)
 
     def demo_read_duplicate(self):
-        self.receiver.receive(func=duplicate.duplicate)
+        self.receiver.receive(func=faultfunction.duplicate)
 
     def demo_read_corrupt(self):
         params = [3, 10]
-        self.receiver.receive(corrupt.corrupt, params)
+        self.receiver.receive(faultfunction.corrupt, params)
 
     def demo_read_delay(self):
-        self.receiver.receive(func = delay.delay, params = [1])
+        self.receiver.receive(func = faultfunction.delay, params = [1])
         print("Received at time: {}".format(time.time()))
 
     def demo_all(self, iterations = 1):

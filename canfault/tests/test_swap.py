@@ -1,6 +1,6 @@
 import unittest
 from canlib import canlib, Frame
-
+from faultfunctions import faultfunction
 class TestSwap(unittest.TestCase):
 
     def reset_swap(self):
@@ -59,7 +59,8 @@ class TestSwap(unittest.TestCase):
 
 
 if __name__ == '__main__': # pragma: no cover
-    from swap import swap
+    from faultfunctions import faultfunction
     unittest.main()
 else:
-    from faultfunctions.swap import swap
+    from faultfunctions.faultfunction import swap
+

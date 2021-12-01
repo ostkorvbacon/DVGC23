@@ -1,4 +1,4 @@
-from faultfunctions import duplicate, swap
+from faultfunctions import faultfunction
 from readwrite import writefault
 from . import framefactory
 from . import printframe

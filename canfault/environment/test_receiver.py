@@ -19,7 +19,7 @@ class TestReceiver(unittest.TestCase):
     
     def test_correct_duplicate(self):
         self.ch.write(self.framefactory.create_random_frame())
-        self.receiver.receive(func = duplicate) 
+        self.receiver.receive(func = faultfunction.duplicate) 
     
     def test_init(self):
         fault = "INCORRECT"
@@ -58,4 +58,4 @@ if __name__ == '__main__':  # pragma: no cover
 else:
     from environment import framefactory
     from environment import receiver
-    from faultfunctions.duplicate import duplicate
+    from faultfunctions import faultfunction
