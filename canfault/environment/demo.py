@@ -43,7 +43,7 @@ class Demo:
         self.receiver.receive(func=faultfunction.insert)
 
     def demo_all(self, iterations = 1):
-        for i in range(0, iterations):
+        for _ in range(0, iterations):
             print("\n________________________________________Start demo________________________________________")
             print("\n------------------------------------------------------------------------------------------")
             print("Faults on write:")
