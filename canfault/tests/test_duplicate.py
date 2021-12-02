@@ -16,3 +16,6 @@ class TestDuplicate(unittest.TestCase):
         f = faultfunction.duplicate(self.frame)
         g = [self.frame, self.frame]
         self.assertEqual(f,g)
+        f = faultfunction.duplicate(self.frame,params=[3])
+        g = [self.frame, self.frame, self.frame]
+        self.assertEqual(f,g)
