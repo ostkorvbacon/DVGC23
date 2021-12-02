@@ -38,8 +38,12 @@ def corrupt(frame, params = []):
     return frame
 
 
-def delay(frame, params =[]):
-    time.sleep(params[0])
+def delay(frame, params = []):
+    if(len(params) == 0):
+        t = 0.1
+    else:
+        t = params[0]
+    time.sleep(t)
     return frame
 
 
