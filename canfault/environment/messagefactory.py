@@ -36,7 +36,8 @@ class MessageFactory:
 
     """Create a single messages with random data"""
     def create_random_message(self, db, name = 'Name', flag = 0, dlc = None, comment = None):
-        name = self.random_name()
+        if name == 'Name':
+            name = self.random_name()
         id = random.randint(self.min, self.max)
 
         message = db.new_message(name, id, flags = flag, dlc = dlc, comment = None)
