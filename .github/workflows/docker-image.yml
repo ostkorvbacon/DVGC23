@@ -26,4 +26,4 @@ jobs:
       run: docker build . --file Dockerfile --tag dockertest
 
     - name: Run the Docker image
-      run: docker run --rm -i dockertest
+      run: docker run --privileged --rm -i dockertest
