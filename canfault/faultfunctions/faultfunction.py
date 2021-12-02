@@ -72,6 +72,6 @@ def swap(frame, params = []):
 
 def insert(frame, params =[]):
     frame_id = random.randint(0, 1023)
-    data = random.randint(2047, 8191)
-    new_frame = Frame(frame_id, data, flags = canlib.MessageFlag.EXT)
+    data = random.randint(0, 255)
+    new_frame = Frame(frame_id, [data], flags = canlib.MessageFlag.EXT)
     return[new_frame,frame]
