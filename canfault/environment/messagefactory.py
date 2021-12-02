@@ -1,5 +1,5 @@
 import random
-from canlib import kvadblib, kvMessage
+from canlib import kvadblib
 
 """Class for creating and inserting messages with randomized data and signals"""
 class MessageFactory:
@@ -14,13 +14,14 @@ class MessageFactory:
         char_max = 255
         char_min = 0
         random.seed()
-        name_length = random.randint(self.min, self.max)
-        name = []
+        name_length = random.randint(self.str_min, self.str_max)
+        str = ""
 
         for _ in range(name_length):
-            name.append(chr(random.ranint(char_min, char_max)))
-        
-        return name
+            char = chr(random.randint(char_min, char_max))
+            str += char
+        str += '\0'
+        return str
 
     """Set the signal of a message with possibly random data"""
     def set_message_signal(self, message, signal_type = kvadblib.SignalType.FLOAT, startbit = 0, length = 32, min = 0, max = 100, unit = ' m', comment = 'No comment' ):
@@ -40,6 +41,7 @@ class MessageFactory:
 
         message = db.new_message(name, id, flags = flag, dlc = dlc, comment = None)
         self.set_message_signal(message)
+        return message
 
     """Create a set of messages with random data and IDs returned as a list"""
     def create_messages(self, db, number_of_messages):

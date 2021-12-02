@@ -1,6 +1,6 @@
 from canlib import canlib, Frame
 from canlib.canlib import ChannelData
-from environment import transciever, receiver, demo
+from environment import transciever, receiver, demo, messagefactory, database
 
 def setUpChannel(channel=0,
                  openFlags=canlib.canOPEN_ACCEPT_VIRTUAL,
@@ -21,6 +21,7 @@ if __name__ == '__main__':
     
     channel_transmit = setUpChannel(channel=0)
     channel_receive = setUpChannel(channel = 1)
+    database = database.Database()
 
     transceiver = transciever.Transceiver(channel_transmit)
     receiver = receiver.Receiver(channel_receive)
@@ -30,3 +31,6 @@ if __name__ == '__main__':
 
     tearDownChannel(channel_transmit)
     tearDownChannel(channel_receive)
+
+    database.add_number_of_items(num = 10)
+    database.print_db()
