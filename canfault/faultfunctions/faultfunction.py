@@ -45,7 +45,10 @@ def delay(frame, params =[]):
 
 def duplicate(frame, params = []):
     f_list = []
-    amount = 2
+    if(len(params) == 0):
+        amount = 2
+    else:
+        amount = params[0] 
     for _ in range(0,amount):
         f_list.append(frame)
     return f_list
