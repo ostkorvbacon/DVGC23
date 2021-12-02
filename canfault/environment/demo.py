@@ -22,6 +22,8 @@ class Demo:
     def demo_write_delay(self):
         print("Transmitting at time: {}".format(time.time()))
         self.transceiver.transmit(func = faultfunction.delay, params = [1])
+    def demo_write_insert(self):
+        self.transceiver.transmit(func=faultfunction.insert)
 
     def demo_read_swap(self):
         self.receiver.receive(faultfunction.swap)
@@ -37,6 +39,8 @@ class Demo:
     def demo_read_delay(self):
         self.receiver.receive(func = faultfunction.delay, params = [1])
         print("Received at time: {}".format(time.time()))
+    def demo_read_insert(self):
+        self.receiver.receive(func=faultfunction.insert)
 
     def demo_all(self, iterations = 1):
         for i in range(0, iterations):
@@ -62,6 +66,10 @@ class Demo:
             print("Received at time: {}".format(time.time()))
             self.receiver.receive()
 
+            print("-----------Insert------------")
+            self.demo_write_insert()
+            self.receiver.receive()
+
             print("\n------------------------------------------------------------------------------------------")
             print("Faults on read:")
             print("------------------------------------------------------------------------------------------")
@@ -82,5 +90,9 @@ class Demo:
             print("Transmitting at time: {}".format(time.time()))
             self.transceiver.transmit()
             self.demo_read_delay()
+
+            print("----------Insert-----------")
+            self.transceiver.transmit()
+            self.demo_read_insert()
 
             print("_________________________________________End demo_________________________________________\n")

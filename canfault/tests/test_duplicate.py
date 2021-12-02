@@ -4,7 +4,7 @@ from canlib import canlib, Frame
 class TestDuplicate(unittest.TestCase):
     
     def setUp(self):
-        self.frame = Frame(23, 22, flags = canlib.MessageFlag.EXT)
+        self.frame = Frame(23, [22], flags = canlib.MessageFlag.EXT)
         pass
     def tearDown(self):
         pass
