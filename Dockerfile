@@ -44,4 +44,4 @@ ADD canfault canfault
 
 WORKDIR /canfault
 
-CMD ["/bin/sh", "run.sh"]
+CMD ["/bin/sh", "run_tests.sh"]
