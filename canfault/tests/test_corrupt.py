@@ -19,10 +19,5 @@ class TestCorrup(unittest.TestCase):
     def test_corrupt(self):
         params = [8, 8]
         inverted_frame = faultfunction.corrupt(self.frame, params)
-        logging.error("inverted_frame: {}". format(inverted_frame.data))
         inverted_test_data = bytes(faultfunction.bit_filler(bitarray('1111 1111 1111 1111 1111 1111')))
-
-
-        logging.error("inverted_test_data: {}". format(inverted_test_data))
-
         self.assertEqual(inverted_frame.data, inverted_test_data)
