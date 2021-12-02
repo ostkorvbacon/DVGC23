@@ -1,4 +1,4 @@
-from typing import List
+from typing import Callable, List
 import canlib
 from readwrite import readfault
 from canlib import Frame
@@ -14,6 +14,11 @@ class Receiver:
 
     """Print the content of the frame"""
     def receive(self, func = None, params = []):
+        if func is not None and not isinstance(func, Callable):
+            raise(TypeError("Object func passed to receive needs to be a Callable"))
+        if not isinstance(params, List):
+            raise(TypeError("Object params passed to receive needs to be a List of parameters"))
+        
         frame = readfault.read(channel=self.channel, func=func, params=params)
         while frame is not None:
             print("Receiving:")

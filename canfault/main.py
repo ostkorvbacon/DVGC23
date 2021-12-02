@@ -26,7 +26,7 @@ if __name__ == '__main__':
     receiver = receiver.Receiver(channel_receive)
     demo = demo.Demo(transceiver, receiver)
 
-    demo.demo_all(3)
+    demo.demo_all(1)
 
     tearDownChannel(channel_transmit)
     tearDownChannel(channel_receive)
