@@ -6,7 +6,7 @@ import time
 import logging
 import random
 
-def bit_filler(frame_as_bits):
+def bit_filler(frame_as_bits = bitarray("0000 0000")):
     bit_filler = bitarray(endian='big')
     bit_filler = util.zeros(8)
     while frame_as_bits.count(0) + frame_as_bits.count(1) < 64:
@@ -21,11 +21,11 @@ def corrupt(frame, params = []):
     else:
         print("start {}  lenght {}". format(start, lenght))
         logging.info("start %d  lenght %d", start, lenght)
-        frame_as_bytes = bytes(frame.data)
 
         if frame.data == None:
             frame_as_bits = util.zeros(64)
         else:
+            frame_as_bytes = bytes(frame.data)
             frame_as_bits = bitarray(endian='big')
             frame_as_bits.frombytes(frame_as_bytes)
             frame_as_bits = bit_filler(frame_as_bits)
@@ -48,7 +48,7 @@ def duplicate(frame, params = []):
     if(len(params) == 0):
         amount = 2
     else:
-        amount = params[0] 
+        amount = params[0]
     for _ in range(0,amount):
         f_list.append(frame)
     return f_list
@@ -81,5 +81,5 @@ def insert(frame, params =[]):
     frame_id = random.randint(0, 1023)
     data = random.randint(0, 255)
     new_frame = Frame(frame_id, [data], flags = canlib.MessageFlag.EXT)
-    
+
     return[new_frame,frame]
