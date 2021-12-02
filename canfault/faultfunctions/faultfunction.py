@@ -3,6 +3,7 @@ from canlib.canlib import ChannelData
 from bitarray import bitarray
 from bitarray import util
 import time
+<<<<<<< HEAD
 import logging
 
 def bit_filler(frame_as_bits):
@@ -11,6 +12,9 @@ def bit_filler(frame_as_bits):
     while frame_as_bits.count(0) + frame_as_bits.count(1) < 64:
         frame_as_bits.extend(bit_filler)
     return frame_as_bits
+=======
+import random
+>>>>>>> 624a1a66d8f30d2995156a0d97a6df707bedb5fe
 
 def corrupt(frame, params = []):
     start = params[0]
@@ -67,3 +71,12 @@ def swap(frame, params = []):
         return [frame, old_frame]
     else:
         return old_frame
+<<<<<<< HEAD
+=======
+
+def insert(frame, params =[]):
+    frame_id = random.randint(0, 1023)
+    data = random.randint(2047, 8191)
+    new_frame = Frame(frame_id, data, flags = canlib.MessageFlag.EXT)
+    return[new_frame,frame]
+>>>>>>> 624a1a66d8f30d2995156a0d97a6df707bedb5fe

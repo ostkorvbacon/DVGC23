@@ -1,3 +1,4 @@
+modprobe virtualcan
 python3 main.py
 python3 -m coverage run -m unittest
 python3 -m coverage report

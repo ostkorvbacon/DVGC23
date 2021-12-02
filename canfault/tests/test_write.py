@@ -5,6 +5,9 @@ import unittest
 def do_nothing(frame, params):
     return frame
 
+def return_None(frame, params):
+    return None
+
 def add(frame, nr):
     fault_frame = frame
     fault_frame.data[0] = fault_frame.data[0] + nr[0]
@@ -75,10 +78,17 @@ class TestWrite(unittest.TestCase):
     def test_write_int_as_channel(self):
         self.assertRaises(TypeError, write, 1, self.frame1)
 
+    def test_write_func_returning_None(self):
+        write(self.channel_write, self.frame1, return_None)
+        ret = read(self.channel_read)
+        self.assertIsNone(ret)
+
     
 
 if __name__ == '__main__': # pragma: no cover
     from writefault import write
+    from readfault import read
     unittest.main()
 else:
     from readwrite.writefault import write
+    from readwrite.readfault import read
