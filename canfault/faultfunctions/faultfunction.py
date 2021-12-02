@@ -44,7 +44,11 @@ def delay(frame, params =[]):
 
 
 def duplicate(frame, params = []):
-    return [frame,frame]
+    f_list = []
+    amount = 2
+    for _ in range(0,amount):
+        f_list.append(frame)
+    return f_list
 
 _frame = None
 _stored = 0
@@ -74,4 +78,5 @@ def insert(frame, params =[]):
     frame_id = random.randint(0, 1023)
     data = random.randint(0, 255)
     new_frame = Frame(frame_id, [data], flags = canlib.MessageFlag.EXT)
+    
     return[new_frame,frame]
