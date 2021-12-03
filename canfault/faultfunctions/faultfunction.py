@@ -15,8 +15,8 @@ def set_stored(frame):
     :param frame: canlib Frame to be stored
     :type frame: canlib.Frame
     
-    :rtype: canlib.Frame or None
-    :return: frame or None
+    :rtype: canlib.Frame, None
+    :return: frame, None
     """
     global _stored
     global _frame
