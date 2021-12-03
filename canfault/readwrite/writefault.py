@@ -5,7 +5,7 @@ def write(channel, frame, func = None, params = []):
     """Writes Frames to a channel and optionally runs them through a function.
  
     :param channel: the channel from whtch the frames are read
-    :type channel: canlib.Channel
+    :type channel: canlib.channel.Channel
     :param frame: the frame to send on channel
     :type frame: canlib.Frame
     :param func: the functions to run the Frames through, defaults to None
