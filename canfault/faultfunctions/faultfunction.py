@@ -15,8 +15,8 @@ def set_stored(frame):
     :param frame: canlib Frame to be stored
     :type frame: canlib.Frame
     
-    :rtype: canlib.Frame, None
-    :return: frame, None
+    :rtype: canlib.Frame or None
+    :return: frame or None
     """
     global _stored
     global _frame
@@ -31,14 +31,6 @@ def set_stored(frame):
         return None, 0
 
 def bit_filler(frame_as_bits = bitarray("0000 0000")):
-    """Fills a bitarray with 64 bits, returns the bitarray.
- 
-    :param frame_as_bits: the bitarray to be filled, defaults to bitarray("0000 0000")
-    :type frame: bitarray, optional
-    
-    :rtype: bitarray
-    :return: frame_as_bits
-    """
     bit_filler = bitarray(endian='big')
     bit_filler = util.zeros(8)
     while frame_as_bits.count(0) + frame_as_bits.count(1) < 64:
@@ -46,16 +38,6 @@ def bit_filler(frame_as_bits = bitarray("0000 0000")):
     return frame_as_bits
 
 def corrupt(frame, params = []):
-    """Bitflipps the data of a Frame, returns the Frame.
- 
-    :param frame: canlib Frame to be bitflipped
-    :type frame: canlib.Frame
-    :param params: params[0] is startbit and params[1] is number of bits to be flipped, defaults to []
-    :type params: list with first and second elements as ints, optional
-    
-    :rtype: canlib.Frame
-    :return: frame
-    """
     start = params[0]
     lenght = params[1]
     if start < 0 or lenght + start > 64:

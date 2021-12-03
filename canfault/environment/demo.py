@@ -2,8 +2,8 @@ import time
 from . import transciever
 from faultfunctions import faultfunction
 #import faultfunction
+"""Contains functions for demoing each of the faultinjection methods."""
 class Demo:
-    """Contains functions for demoing each of the faultinjection methods."""
     def __init__(self, transceiver, receiver):
         self.transceiver = transceiver
         self.receiver = receiver
