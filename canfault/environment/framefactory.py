@@ -1,15 +1,19 @@
 from canlib import canlib, Frame
 import random
 
-"""Class for creating and returning frames with randomized IDs and data"""
 class FrameFactory:
+    """Class for creating and returning frames with randomized IDs and data."""
     def __init__(self):
         self.min = 0
         self.max = 255
         self.data_amount = 8
 
-    """Create a single frame with random ID and data"""
     def create_random_frame(self):
+        """Create a single frame with random ID and data.
+
+        rtype: canlib.Frame
+        return: frame
+        """
         random.seed()
         data = []
         for _ in range(self.data_amount):
@@ -19,8 +23,15 @@ class FrameFactory:
 
         return frame
 
-    """Create a set of frames with random data and IDs returned as a list"""
     def create_frames(self, number_of_frames):
+        """Create a set of frames with random data and IDs returned as a list
+        
+        param number_of_frames: number of frames to be created
+        type number_of_frames: int
+
+        rtype: List
+        return: [canlib.Frame]
+        """
         if not isinstance(number_of_frames, int):
             raise(TypeError("number_of_frames needs to be an int"))
         frames = []

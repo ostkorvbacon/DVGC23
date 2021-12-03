@@ -24,23 +24,30 @@ class MessageFactory:
         return str
 
     """Set the signal of a message with possibly random data"""
-    def set_message_signal(self, message, signal_type = kvadblib.SignalType.FLOAT, startbit = 0, length = 32, min = 0, max = 100, unit = ' m', comment = 'No comment' ):
+    def set_message_signal(self, message, 
+                            signal_type=kvadblib.SignalType.FLOAT, 
+                            startbit=0, 
+                            length=32, 
+                            min=0, 
+                            max=100, 
+                            unit=' m', 
+                            comment='No comment' ):
         message.new_signal(
-            name    = self.random_name(),
-            type    = signal_type,
-            size    = kvadblib.ValueSize( startbit = startbit, length = length) ,
-            limits  = kvadblib.ValueLimits(min = min, max = max) ,
-            unit    = unit,
+            name = self.random_name(),
+            type = signal_type,
+            size = kvadblib.ValueSize( startbit = startbit, length = length),
+            limits = kvadblib.ValueLimits(min = min, max = max),
+            unit = unit,
             comment = comment
         )
 
     """Create a single messages with random data"""
-    def create_random_message(self, db, name = 'Name', flag = 0, dlc = None, comment = None):
+    def create_random_message(self, db, name='Name', flag=0, dlc=None, comment=None):
         if name == 'Name':
             name = self.random_name()
         id = random.randint(self.min, self.max)
 
-        message = db.new_message(name, id, flags = flag, dlc = dlc, comment = None)
+        message = db.new_message(name, id, flags = flag, dlc = dlc, comment = comment)
         self.set_message_signal(message)
         return message
 
