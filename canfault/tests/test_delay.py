@@ -19,7 +19,7 @@ class TestDelay(unittest.TestCase):
     
     def test_delay_one_sec(self):
         start = timer()
-        ret_frame = delay(self.frame1, [1])
+        ret_frame = faultfunction.delay(self.frame1, [1])
         time = timer() - start
         self.assertGreaterEqual(time, 1)
         self.assertLess(time, 2)
@@ -27,17 +27,8 @@ class TestDelay(unittest.TestCase):
 
     def test_delay_no_param(self):
         start = timer()
-        ret_frame = delay(self.frame1)
+        ret_frame = faultfunction.delay(self.frame1)
         time = timer() - start
         self.assertGreaterEqual(time, 0.1)
         self.assertLess(time, 1)
         self.assertEqual(ret_frame, self.frame1)
-
-    
-
-if __name__ == '__main__': # pragma: no cover
-    from faultfunctions import delay
-    unittest.main()
-else:
-    from faultfunctions.faultfunction import delay
-
