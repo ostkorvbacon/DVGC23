@@ -1,6 +1,6 @@
 import unittest
 from main import setUpChannel
-
+from environment import transciever
 class TestTransceiver(unittest.TestCase):
     """Tests the environment.transciever function."""
     def setUp(self) -> None:
@@ -19,9 +19,10 @@ class TestTransceiver(unittest.TestCase):
     def tearDown(self) -> None:
         self.ch.busOff()
         self.ch.close()
-
+'''
 if __name__ == '__main__':  # pragma: no cover
     import transciever
     unittest.main()
 else:
     from environment import transciever
+'''

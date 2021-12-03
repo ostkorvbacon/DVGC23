@@ -1,6 +1,9 @@
 import unittest
 from canlib import canlib
 from main import setUpChannel
+from environment import framefactory
+from environment import receiver
+from faultfunctions import faultfunction
 
 class TestReceiver(unittest.TestCase):
     """Tests the environment.receiver function."""
@@ -36,7 +39,7 @@ class TestReceiver(unittest.TestCase):
         self.ch.close()
         self.ch1.busOff()
         self.ch1.close()
-
+'''
 if __name__ == '__main__':  # pragma: no cover
     import framefactory
     import receiver
@@ -59,3 +62,4 @@ else:
     from environment import framefactory
     from environment import receiver
     from faultfunctions import faultfunction
+'''

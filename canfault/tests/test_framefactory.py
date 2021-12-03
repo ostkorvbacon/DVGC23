@@ -1,4 +1,5 @@
 import unittest
+from environment import framefactory
 
 class TestFrameFactory(unittest.TestCase):
     """Tests the environment.frameFactory function."""
@@ -13,9 +14,10 @@ class TestFrameFactory(unittest.TestCase):
     
     def test_create_frames_input(self):
         self.assertRaises(TypeError, self.framefactory.create_frames, "NNNNNNNN")
-
+'''
 if __name__ == '__main__':  # pragma: no cover
     import framefactory
     unittest.main()
 else:
     from environment import framefactory
+    '''

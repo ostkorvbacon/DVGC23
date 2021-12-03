@@ -1,6 +1,8 @@
 from canlib import canlib, Frame
 from canlib.canlib import ChannelData
 import unittest
+from readwrite.writefault import write
+from readwrite.readfault import read
 
 def do_nothing(frame, params):
     return frame
@@ -90,7 +92,7 @@ class TestWrite(unittest.TestCase):
         self.assertRaises(TypeError, write, self.channel_write, self.frame1, params = 1)
 
     
-
+'''
 if __name__ == '__main__': # pragma: no cover
     from writefault import write
     from readfault import read
@@ -98,3 +100,4 @@ if __name__ == '__main__': # pragma: no cover
 else:
     from readwrite.writefault import write
     from readwrite.readfault import read
+'''
