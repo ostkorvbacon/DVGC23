@@ -1,4 +1,6 @@
 import unittest
+import printframe
+import framefactory
 from canlib import Frame, frame
 
 class TestPrintFrame(unittest.TestCase):
@@ -11,11 +13,3 @@ class TestPrintFrame(unittest.TestCase):
     
     def test_print_frame_type_wrong(self):
         self.assertRaises(TypeError, printframe.print_frame, "INCORRECT")
-
-if __name__ == '__main__':  # pragma: no cover
-    import printframe
-    import framefactory
-    unittest.main()
-else:
-    from environment import printframe
-    from environment import framefactory
