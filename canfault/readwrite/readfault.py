@@ -10,7 +10,7 @@ def read(channel, func = None, frame = None, params = []):
     """Reads Frames from a channel and optionally runs them through a function, returns the Frame.
  
     :param channel: the channel from whtch the frames are read
-    :type channel: canlib.Channel
+    :type channel: canlib.channel.Channel
     :param func: the functions to run the Frames through, defaults to None
     :type func: callable, optional
     :param frame: if provided, this frame will be used instead of reading from channel, defaults to None
