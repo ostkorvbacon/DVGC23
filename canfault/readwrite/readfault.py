@@ -1,4 +1,5 @@
 from canlib import canlib, Frame
+from typing import Callable
 
 def read(channel, func = None, frame = None, params = []):
     """Reads Frames from a channel and optionally runs them through a function, returns the Frame.
@@ -16,6 +17,10 @@ def read(channel, func = None, frame = None, params = []):
     :rtype: canlib.Frame, None
     :return: frame, None
     """
+    if func is not None and not isinstance(func, Callable):
+        raise(TypeError("The passed func is not a callable!"))
+    if not isinstance(params, list):
+        raise(TypeError("The passed params is not a list!"))
     if(frame is not None and not isinstance(frame, Frame)):
         raise TypeError("The passed frame is not a canlib Frame!")
     if(not isinstance(channel, canlib.channel.Channel)):

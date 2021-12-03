@@ -1,4 +1,5 @@
 from canlib import canlib, Frame
+from typing import Callable
 
 def write(channel, frame, func = None, params = []):
     """Writes Frames to a channel and optionally runs them through a function.
@@ -13,6 +14,10 @@ def write(channel, frame, func = None, params = []):
     :type params: list, optional
     :raises TypeError: if parameters are of the wrong type
     """
+    if func is not None and not isinstance(func, Callable):
+        raise(TypeError("The passed func is not a callable!"))
+    if not isinstance(params, list):
+        raise(TypeError("The passed params is not a list!"))
     if(not isinstance(frame, Frame)):
         if(not isinstance(frame, list)):
             raise TypeError("The passed frame is not a canlib Frame!")
@@ -21,7 +26,7 @@ def write(channel, frame, func = None, params = []):
                 if(not isinstance(single_frame, Frame)):
                     raise TypeError("The passed frame is not a canlib Frame!")
     if(not isinstance(channel, canlib.channel.Channel)):
-        raise TypeError("The passed frame is not a canlib Frame!")
+        raise TypeError("The passed channel is not a canlib Channel!")
     if(func is None):
         frame_fault = frame
     else:
