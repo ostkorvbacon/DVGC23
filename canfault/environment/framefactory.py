@@ -11,8 +11,8 @@ class FrameFactory:
     def create_random_frame(self):
         """Create a single frame with random ID and data.
 
-        rtype: canlib.Frame
-        return: frame
+        :return: frame
+        :rtype: canlib.Frame
         """
         random.seed()
         data = []
@@ -29,8 +29,8 @@ class FrameFactory:
         param number_of_frames: number of frames to be created
         type number_of_frames: int
 
-        rtype: List
-        return: [canlib.Frame]
+        :return: [canlib.Frame]
+        :rtype: List
         """
         if not isinstance(number_of_frames, int):
             raise(TypeError("number_of_frames needs to be an int"))

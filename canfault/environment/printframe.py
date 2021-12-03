@@ -4,7 +4,7 @@ def print_frame(frame):
     """Print a frame formatted for easy reading
     
     :param frame: Frame to print.
-    :type fram: canlib.Frame
+    :type frame: canlib.Frame
     """
     if not isinstance(frame, Frame):
         raise TypeError("print_frame requires type Frame")
