@@ -83,6 +83,12 @@ class TestWrite(unittest.TestCase):
         ret = read(self.channel_read)
         self.assertIsNone(ret)
 
+    def test_write_faulty_arguments_func(self):
+        self.assertRaises(TypeError, write, self.channel_write, self.frame1, func = 1)
+
+    def test_write_faulty_arguments_params(self):
+        self.assertRaises(TypeError, write, self.channel_write, self.frame1, params = 1)
+
     
 
 if __name__ == '__main__': # pragma: no cover

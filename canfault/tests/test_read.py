@@ -67,7 +67,13 @@ class TestRead(unittest.TestCase):
         self.assertRaises(TypeError, read, self.channel_read, frame = 1)
 
     def test_read_int_as_channel(self):
-        self.assertRaises(TypeError, read, 1, self.frame1)
+        self.assertRaises(TypeError, read, 1)
+
+    def test_write_faulty_arguments_func(self):
+        self.assertRaises(TypeError, read, self.channel_read, func = 1)
+
+    def test_write_faulty_arguments_params(self):
+        self.assertRaises(TypeError, read, self.channel_read, params = 1)
 
     
 
