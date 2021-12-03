@@ -11,7 +11,11 @@ class MessageFactory:
         self.data_amount = 8
     
     def random_name(self):
-        """Creates a randomized string of a randomized length between 0 and 255, returns the string"""
+        """Creates a randomized name of a randomized length between 0 and 255. 
+        
+        :return: The randomized name.
+        :rtype: String
+        """
         char_max = 255
         char_min = 0
         random.seed()
@@ -71,7 +75,10 @@ class MessageFactory:
         :type flag: kvadblib.MessageFlag
         :param dlc: The DLC field. Defaults to 0.
         :param comment: Comment describing the message. Defaults to None
-        :tyoe comment: String
+        :type comment: String
+
+        :return: The message
+        :rtype: kadblib.Message
         """
         if name == 'Name':
             name = self.random_name()
