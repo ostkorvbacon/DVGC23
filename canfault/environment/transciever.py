@@ -5,12 +5,13 @@ from . import printframe
 from typing import Callable, List
 
 class Transceiver:
+    """Creates a Frame and transmits over the channel, optionally supply faultfunction"""
     def __init__(self, channel):
         self.channel = channel
         self.factory = framefactory.FrameFactory()
 
-    """Transmit a random frame over the channel, optionally supply faultfunction"""
     def transmit(self, func = None, params = []):
+        """Transmit a random Frame over the channel, optionally supply faultfunction"""
         if func is not None and not isinstance(func, Callable):
             raise(TypeError("Object func passed to transmit needs to be a Callable"))
         if not isinstance(params, List):

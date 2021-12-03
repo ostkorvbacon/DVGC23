@@ -1,8 +1,8 @@
 import random
 from canlib import kvadblib
 
-"""Class for creating and inserting messages with randomized data and signals"""
 class MessageFactory:
+    """Creates and insertes messages with randomized data and signals"""
     def __init__(self):
         self.str_min = 1
         self.str_max = 64
@@ -11,6 +11,7 @@ class MessageFactory:
         self.data_amount = 8
     
     def random_name(self):
+        """Creates a randomized string of a randomized length, returns the string"""
         char_max = 255
         char_min = 0
         random.seed()
@@ -23,8 +24,8 @@ class MessageFactory:
         str += '\0'
         return str
 
-    """Set the signal of a message with possibly random data"""
     def set_message_signal(self, message, signal_type = kvadblib.SignalType.FLOAT, startbit = 0, length = 32, min = 0, max = 100, unit = ' m', comment = 'No comment' ):
+        """Set the signal of a message with possibly random data"""
         message.new_signal(
             name    = self.random_name(),
             type    = signal_type,
@@ -34,8 +35,8 @@ class MessageFactory:
             comment = comment
         )
 
-    """Create a single messages with random data"""
     def create_random_message(self, db, name = 'Name', flag = 0, dlc = None, comment = None):
+        """Creates a single messages with random data, returns the message"""
         if name == 'Name':
             name = self.random_name()
         id = random.randint(self.min, self.max)
@@ -44,8 +45,8 @@ class MessageFactory:
         self.set_message_signal(message)
         return message
 
-    """Create a set of messages with random data and IDs returned as a list"""
     def create_messages(self, db, number_of_messages):
+        """Creates a set of messages with random data and IDs, returns the set as a list"""
         if not isinstance(number_of_messages, int):
             raise(TypeError("number_of_messages needs to be an int"))
         for _ in range(number_of_messages):
