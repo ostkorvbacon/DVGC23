@@ -3,8 +3,8 @@ from canlib import canlib, Frame
 from faultfunctions import faultfunction
 from timeit import default_timer as timer
 
-class TestSwap(unittest.TestCase):
-
+class TestDelay(unittest.TestCase):
+    """Tests the faultfuncton.delay function."""
     def setUp(self):
         self.frame1 = Frame(
             id_=0,

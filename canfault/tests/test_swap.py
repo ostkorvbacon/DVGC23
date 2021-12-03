@@ -1,8 +1,9 @@
 import unittest
 from canlib import canlib, Frame
 from faultfunctions import faultfunction
-class TestSwap(unittest.TestCase):
 
+class TestSwap(unittest.TestCase):
+    """Tests the faultfuncton.swap function."""
     def reset_swap(self):
         if(swap(self.frame1) is None):
             swap(self.frame1)

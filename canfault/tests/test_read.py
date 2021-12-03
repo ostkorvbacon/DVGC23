@@ -21,12 +21,13 @@ def tearDownChannel(ch):
     ch.close()
 
 def reset(ch):
+    """Makes sure there are no Frames left in the message queue on the provided channel."""
     frame = read(ch)
     while frame is not None:
         frame = read(ch)
 
 class TestRead(unittest.TestCase):
-    
+    """Tests the readwrite.read function."""
     def setUp(self):
         self.channel_read = setUpChannel(0)
         self.channel_write = setUpChannel(1)

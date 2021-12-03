@@ -2,6 +2,7 @@ import unittest
 from canlib import Frame, frame
 
 class TestPrintFrame(unittest.TestCase):
+    """Tests the environment.printframe function."""
     def setUp(self) -> None:
         self.framefactory = framefactory.FrameFactory()
 

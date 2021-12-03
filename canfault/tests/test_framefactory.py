@@ -1,6 +1,7 @@
 import unittest
 
 class TestFrameFactory(unittest.TestCase):
+    """Tests the environment.frameFactory function."""
     def setUp(self) -> None:
         self.framefactory = framefactory.FrameFactory()
 

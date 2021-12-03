@@ -29,7 +29,7 @@ def tearDownChannel(ch):
     ch.close()
 
 class TestWrite(unittest.TestCase):
-    
+    """Tests the readwrite.write function."""
     def setUp(self):
         self.channel_read = setUpChannel(0)
         self.channel_write = setUpChannel(1)

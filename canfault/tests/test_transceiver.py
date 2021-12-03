@@ -2,6 +2,7 @@ import unittest
 from main import setUpChannel
 
 class TestTransceiver(unittest.TestCase):
+    """Tests the environment.transciever function."""
     def setUp(self) -> None:
         self.ch = setUpChannel()
         self.transceiver = transciever.Transceiver(self.ch)

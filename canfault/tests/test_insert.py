@@ -1,8 +1,9 @@
 import unittest
 from faultfunctions import faultfunction
 from canlib import canlib, Frame
-class TestDuplicate(unittest.TestCase):
-    
+
+class TestInsert(unittest.TestCase):
+    """Tests the faultfuncton.insert function."""
     def setUp(self):
         self.frame = Frame(23, [22], flags = canlib.MessageFlag.EXT)
         pass
