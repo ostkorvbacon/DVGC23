@@ -57,12 +57,3 @@ class TestSwap(unittest.TestCase):
         self.assertIsNone(ret1_frame)
         self.assertEqual(ret2_frame[1], self.frame2)
         self.assertIsNone(ret2_frame[0])
-
-'''
-if __name__ == '__main__': # pragma: no cover
-    from faultfunctions import faultfunction
-    unittest.main()
-else:
-    from faultfunctions.faultfunction import swap
-
-'''

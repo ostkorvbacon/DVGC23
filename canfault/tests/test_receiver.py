@@ -39,27 +39,3 @@ class TestReceiver(unittest.TestCase):
         self.ch.close()
         self.ch1.busOff()
         self.ch1.close()
-'''
-if __name__ == '__main__':  # pragma: no cover
-    import framefactory
-    import receiver
-    from faultfunctions import duplicate
-
-    def setUpChannel():
-        def setUpChannel(channel=0,
-                 openFlags=canlib.canOPEN_ACCEPT_VIRTUAL,
-                 bitrate=canlib.canBITRATE_500K,
-                 bitrateFlags=canlib.canDRIVER_NORMAL):
-
-            ch = canlib.openChannel(channel, openFlags)
-            ch.setBusOutputControl(bitrateFlags)
-            ch.setBusParams(bitrate)
-            ch.busOn()
-            return ch
-
-    unittest.main()
-else:
-    from environment import framefactory
-    from environment import receiver
-    from faultfunctions import faultfunction
-'''

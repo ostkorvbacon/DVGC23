@@ -14,10 +14,3 @@ class TestFrameFactory(unittest.TestCase):
     
     def test_create_frames_input(self):
         self.assertRaises(TypeError, self.framefactory.create_frames, "NNNNNNNN")
-'''
-if __name__ == '__main__':  # pragma: no cover
-    import framefactory
-    unittest.main()
-else:
-    from environment import framefactory
-    '''

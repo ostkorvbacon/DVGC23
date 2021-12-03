@@ -32,12 +32,3 @@ class TestDelay(unittest.TestCase):
         self.assertGreaterEqual(time, 0.1)
         self.assertLess(time, 1)
         self.assertEqual(ret_frame, self.frame1)
-
-    
-
-if __name__ == '__main__': # pragma: no cover
-    from faultfunctions import delay
-    unittest.main()
-else:
-    from faultfunctions.faultfunction import delay
-

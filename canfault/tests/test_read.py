@@ -75,13 +75,3 @@ class TestRead(unittest.TestCase):
 
     def test_write_faulty_arguments_params(self):
         self.assertRaises(TypeError, read, self.channel_read, params = 1)
-
-    
-
-'''    
-if __name__ == '__main__': # pragma: no cover
-    from readfault import read
-    unittest.main()
-else:
-    from readwrite.readfault import read
-    '''
