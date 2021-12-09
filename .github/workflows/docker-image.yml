@@ -34,7 +34,7 @@ jobs:
         tags: dockertest
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
-        outputs: type=docker,dest=/tmp/myimage.tar
+        outputs: type=docker,dest=dockertest
     - name: Run the Docker image
       run: docker run --privileged --rm -i dockertest && ls canfault
 
