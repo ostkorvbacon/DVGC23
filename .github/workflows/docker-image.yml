@@ -28,7 +28,7 @@ jobs:
       with:
         context: ./
         file: ./Dockerfile
-        builder: docker buildx create
+        builder: docker buildx build
         push: true
         tags: dockertest
         cache-from: type=local,src=/tmp/.buildx-cache
