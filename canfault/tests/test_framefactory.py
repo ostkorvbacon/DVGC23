@@ -1,6 +1,7 @@
 import unittest
 from environment import framefactory
 
+
 class TestFrameFactory(unittest.TestCase):
     """Tests the environment.frameFactory function."""
     def setUp(self) -> None:
@@ -11,6 +12,7 @@ class TestFrameFactory(unittest.TestCase):
 
     def test_create_frames(self):
         self.assertIsNotNone(self.framefactory.create_frames(2))
-    
+
     def test_create_frames_input(self):
-        self.assertRaises(TypeError, self.framefactory.create_frames, "NNNNNNNN")
+        self.assertRaises(
+            TypeError, self.framefactory.create_frames, "NNNNNNNN")
