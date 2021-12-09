@@ -2,13 +2,16 @@ import unittest
 from canlib import canlib, Frame
 from canlib.canlib import ChannelData
 from readwrite.readfault import read
+
+
 def do_nothing(frame, params):
     return frame
 
+
 def setUpChannel(channel=0,
-        openFlags=canlib.canOPEN_ACCEPT_VIRTUAL,
-        bitrate=canlib.canBITRATE_500K,
-        bitrateFlags=canlib.canDRIVER_NORMAL):
+                 openFlags=canlib.canOPEN_ACCEPT_VIRTUAL,
+                 bitrate=canlib.canBITRATE_500K,
+                 bitrateFlags=canlib.canDRIVER_NORMAL):
 
     ch = canlib.openChannel(channel, openFlags)
     ch.setBusOutputControl(bitrateFlags)
@@ -16,15 +19,18 @@ def setUpChannel(channel=0,
     ch.busOn()
     return ch
 
+
 def tearDownChannel(ch):
     ch.busOff()
     ch.close()
+
 
 def reset(ch):
     """Makes sure there are no Frames left in the message queue on the provided channel."""
     frame = read(ch)
     while frame is not None:
         frame = read(ch)
+
 
 class TestRead(unittest.TestCase):
     """Tests the readwrite.read function."""
@@ -55,23 +61,23 @@ class TestRead(unittest.TestCase):
     def test_read_provided_frame(self):
         ret_frame = read(self.channel_read, do_nothing, self.frame1)
         self.assertEqual(ret_frame, self.frame1)
-    
+
     def test_read_no_func(self):
-        ret_frame = read(self.channel_read, frame = self.frame1)
+        ret_frame = read(self.channel_read, frame=self.frame1)
         self.assertEqual(ret_frame, self.frame1)
-    
+
     def test_read_no_msg(self):
         ret_frame = read(self.channel_read)
         self.assertIsNone(ret_frame)
-    
+
     def test_read_int_as_frame(self):
-        self.assertRaises(TypeError, read, self.channel_read, frame = 1)
+        self.assertRaises(TypeError, read, self.channel_read, frame=1)
 
     def test_read_int_as_channel(self):
         self.assertRaises(TypeError, read, 1)
 
     def test_write_faulty_arguments_func(self):
-        self.assertRaises(TypeError, read, self.channel_read, func = 1)
+        self.assertRaises(TypeError, read, self.channel_read, func=1)
 
     def test_write_faulty_arguments_params(self):
-        self.assertRaises(TypeError, read, self.channel_read, params = 1)
+        self.assertRaises(TypeError, read, self.channel_read, params=1)
