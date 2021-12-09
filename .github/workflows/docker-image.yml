@@ -26,7 +26,7 @@ jobs:
       run: docker build . --file Dockerfile --tag dockertest
 
     - name: Run the Docker image
-      run: docker run --privileged --rm -i dockertest && ls canfault
+      run: docker run --privileged --rm -i dockertest && mkdir html_report && ls canfault
       
     - name: Archive code coverage results
       uses: actions/upload-artifact@v2
