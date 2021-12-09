@@ -1,12 +1,14 @@
 from canlib import canlib, Frame
 from canlib.canlib import ChannelData
 from environment import transciever, receiver, demo, messagefactory, database
+import logging
 
 
 def setUpChannel(channel=0,
                  openFlags=canlib.canOPEN_ACCEPT_VIRTUAL,
                  bitrate=canlib.canBITRATE_500K,
                  bitrateFlags=canlib.canDRIVER_NORMAL):
+    logging.debug("Start")
     """Sets up a Channel, returns the channel.
 
     :param channel: channel number, defaults to 0
@@ -27,15 +29,23 @@ def setUpChannel(channel=0,
     ch.setBusOutputControl(bitrateFlags)
     ch.setBusParams(bitrate)
     ch.busOn()
+    logging.debug("End")
     return ch
 
 
 def tearDownChannel(ch):
+    logging.debug("Start")
     """Closes the provided canlib.channel.Channel."""
     ch.busOff()
     ch.close()
+    logging.debug("End")
 
 if __name__ == '__main__':
+    """Setting up logger"""
+    logging.basicConfig(filename='logging.log', level=logging.DEBUG,
+                        format='%(asctime)s - %(levelname)s %(filename)s.%(funcName)s - %(message)s',
+                        datefmt='%Y/%m/%d %I:%M')
+
     """Runs the setup for demo and runs the demo."""
     channel_transmit = setUpChannel(channel=0)
     channel_receive = setUpChannel(channel=1)
