@@ -11,11 +11,13 @@ def setUpChannel(channel=0,
 
     :param channel: channel number, defaults to 0
     :type channel: int, optional
-    :param openFlags: flags to set when opening the channel, defaults to canlib.canOPEN_ACCEPT_VIRTUAL
+    :param openFlags: flags to set when opening the channel,
+    defaults to canlib.canOPEN_ACCEPT_VIRTUAL
     :type openFlags: unsigned int *, optional
     :param bitrate: bitrate of the channel, defaults to canlib.canBITRATE_500K
     :type bitrate: int, optional
-    :param bitrateFlags: flags for the bitrate, defaults to canlib.canDRIVER_NORMAL
+    :param bitrateFlags: flags for the bitrate,
+    defaults to canlib.canDRIVER_NORMAL
     :type bitrateFlags: int, optional
 
     :rtype: canlib.channel.Channel
