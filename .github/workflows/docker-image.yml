@@ -35,10 +35,10 @@ jobs:
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
         outputs: type=docker,dest=/tmp/myimage.tar
-    - name: Load image
+    - name: run docker
       run: |
-        docker load --input /tmp/myimage.tar
         docker run --privileged --rm -i dockertest && ls canfault
+      # docker load --input /tmp/myimage.tar
     #- name: Run the Docker image
     #  run: docker run --privileged --rm -i dockertest && ls canfault
 
