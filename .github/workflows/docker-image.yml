@@ -11,10 +11,6 @@ jobs:
   build:
 
     runs-on: ubuntu-20.04
-    container:
-      image: 'Dockerfile'
-      volumes:
-      - /workspace:/github/workspace
     
     steps:
     - name: Checkout
