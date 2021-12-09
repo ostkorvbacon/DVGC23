@@ -27,3 +27,9 @@ jobs:
 
     - name: Run the Docker image
       run: docker run --privileged --rm -i dockertest
+      
+    - name: Archive code coverage results
+      uses: actions/upload-artifact@v2
+      with:
+        name: code-coverage-report
+        path: canfault/coverage_html_report/index.html
