@@ -35,32 +35,13 @@ jobs:
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
         outputs: type=docker,dest=/tmp/myimage.tar
+    - name: Run the Docker image
+      run: docker run --privileged --rm -i dockertest && ls canfault
 
-    - name: Upload artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: dockertest
-        path: /tmp/dockertest.tar
+    #- name: Upload artifact
+    #  uses: actions/upload-artifact@v2
+    #  with:
+    #    name: dockertest
+    #    path: /tmp/dockertest.tar
    # - name: Build the Docker image
    #   run: docker build . --file Dockerfile --tag dockertest
-      
-  run:
-    needs: build
-    runs-on: ubuntu-20.04
-      
-    steps:
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
-    - name: Download artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: dockertest
-        path: /tmp
-    - name: Run the Docker image
-      run: docker run --privileged --rm -i /tmp/dockertest && ls canfault
-      
-    - name: Archive code coverage results
-      uses: actions/upload-artifact@v2
-      with:
-        name: code-coverage-report/
-        path: canfault/html_report/
