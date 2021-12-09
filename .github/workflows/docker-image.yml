@@ -38,7 +38,9 @@ jobs:
     - name: Load and Run docker
       run: |
         docker load --input /tmp/myimage.tar
-        docker run --privileged --rm -i dockertest && ls canfault
+        mkdir canfault/html_report
+        docker run -di -P --rm --privileged -v /DVGC23/canfault/coverage_html_report/:/canfault/coverage_html_report/ dockertest
+      #docker run --privileged --rm -i dockertest
       # docker load --input /tmp/myimage.tar
     #- name: Run the Docker image
     #  run: docker run --privileged --rm -i dockertest && ls canfault
