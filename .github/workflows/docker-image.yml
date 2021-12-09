@@ -29,10 +29,10 @@ jobs:
       run: docker run --privileged --rm -i dockertest
       
     - name: Check dir content
-      run: ls
+      run: ls canfault
       
     - name: Archive code coverage results
       uses: actions/upload-artifact@v2
       with:
         name: code-coverage-report/
-        path: DVGC23/canfault/coverage_html_report/
+        path: /canfault/coverage_html_report/
