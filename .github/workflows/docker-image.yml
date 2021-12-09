@@ -28,7 +28,7 @@ jobs:
       with:
         context: ./
         file: ./Dockerfile
-        builder: ${{ steps.buildx.outputs.name }}
+        builder: docker buildx create --use
         push: true
         tags: dockertest
         cache-from: type=local,src=/tmp/.buildx-cache
@@ -37,6 +37,7 @@ jobs:
    #   run: docker build . --file Dockerfile --tag dockertest
       
   run:
+    needs: build
     runs-on: ubuntu-20.04
       
     steps:
