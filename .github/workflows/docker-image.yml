@@ -34,9 +34,13 @@ jobs:
         tags: dockertest
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
-        outputs: type=docker,dest=dockertest
-    - name: Run the Docker image
-      run: docker run --privileged --rm -i dockertest && ls canfault
+        outputs: type=docker,dest=/tmp/myimage.tar
+    - name: Load image
+      run: |
+        docker load --input /tmp/myimage.tar
+        docker image ls -a
+    #- name: Run the Docker image
+    #  run: docker run --privileged --rm -i dockertest && ls canfault
 
     #- name: Upload artifact
     #  uses: actions/upload-artifact@v2
