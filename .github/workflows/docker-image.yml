@@ -38,7 +38,7 @@ jobs:
     - name: Load image
       run: |
         docker load --input /tmp/myimage.tar
-        docker image ls -a
+        docker run --privileged --rm -i dockertest && ls canfault
     #- name: Run the Docker image
     #  run: docker run --privileged --rm -i dockertest && ls canfault
 
