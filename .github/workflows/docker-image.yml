@@ -39,7 +39,7 @@ jobs:
       run: |
         docker load --input /tmp/myimage.tar
         mkdir canfault/coverage_html_report
-        docker run -di -P --rm --privileged -v /DVGC23/canfault/coverage_html_report/:/canfault/coverage_html_report/ dockertest
+        docker run -di -P --rm --privileged -v ${GITHUB_WORKSPACE}/DVGC23/canfault/coverage_html_report/:/canfault/coverage_html_report/ dockertest
       #docker run --privileged --rm -i dockertest
       # docker load --input /tmp/myimage.tar
     #- name: Run the Docker image
