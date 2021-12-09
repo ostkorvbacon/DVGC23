@@ -37,7 +37,7 @@ jobs:
         outputs: type=docker,dest=/tmp/myimage.tar
     - name: Load and Run docker
       run: |
-        mkdir ${GITHUB_WORKSPACE}/canfault/coverage_html_report
+        mkdir ${GITHUB_WORKSPACE}/canfault/test_result/
       #docker load --input /tmp/myimage.tar
       #docker run -di -P --rm --privileged -v ${GITHUB_WORKSPACE}/DVGC23/canfault/coverage_html_report/:/canfault/coverage_html_report/ dockertest
       # docker load --input /tmp/myimage.tar
