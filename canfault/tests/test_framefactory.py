@@ -14,4 +14,5 @@ class TestFrameFactory(unittest.TestCase):
         self.assertIsNotNone(self.framefactory.create_frames(2))
 
     def test_create_frames_input(self):
-        self.assertRaises(TypeError, self.framefactory.create_frames, "NNNNNNNN")
+        self.assertRaises(
+            TypeError, self.framefactory.create_frames, "NNNNNNNN")

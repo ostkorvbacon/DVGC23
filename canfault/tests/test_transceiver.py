@@ -13,7 +13,8 @@ class TestTransceiver(unittest.TestCase):
         self.transceiver.transmit()
 
     def test_faulty_arguments_func(self):
-        self.assertRaises(TypeError, self.transceiver.transmit, func=[1, "hej"])
+        self.assertRaises(
+            TypeError, self.transceiver.transmit, func=[1, "hej"])
 
     def test_faulty_arguments_params(self):
         self.assertRaises(TypeError, self.transceiver.transmit, params=1)

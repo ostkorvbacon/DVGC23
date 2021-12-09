@@ -20,7 +20,8 @@ class TestCorrup(unittest.TestCase):
     def test_corrupt(self):
         params = [8, 8]
         inverted_frame = faultfunction.corrupt(self.frame, params)
-        inverted_test_data = bytes(faultfunction.bit_filler(bitarray('1111 1111 1111 1111 1111 1111')))
+        inverted_test_data = bytes(faultfunction.bit_filler(
+            bitarray('1111 1111 1111 1111 1111 1111')))
         self.assertEqual(inverted_frame.data, inverted_test_data)
 
         self.frame.data = bytes(faultfunction.bit_filler())
@@ -29,6 +30,7 @@ class TestCorrup(unittest.TestCase):
         self.assertEqual(inverted_frame.data, inverted_test_data)
 
         self.frame.data = None
-        inverted_test_data = bytes(faultfunction.bit_filler(bitarray('0000 0000 1111 1111')))
+        inverted_test_data = bytes(faultfunction.bit_filler(
+            bitarray('0000 0000 1111 1111')))
         inverted_frame = faultfunction.corrupt(self.frame, params)
         self.assertEqual(inverted_frame.data, inverted_test_data)

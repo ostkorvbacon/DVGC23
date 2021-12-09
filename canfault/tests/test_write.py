@@ -76,7 +76,8 @@ class TestWrite(unittest.TestCase):
         self.assertEqual(ret_frame, self.frame1)
 
     def test_write_int_array_as_frame(self):
-        self.assertRaises(TypeError, write, self.channel_write, [self.frame1, 1])
+        self.assertRaises(
+            TypeError, write, self.channel_write, [self.frame1, 1])
 
     def test_write_params(self):
         write(self.channel_write, self.frame1, add, [5])
@@ -92,7 +93,9 @@ class TestWrite(unittest.TestCase):
         self.assertIsNone(ret)
 
     def test_write_faulty_arguments_func(self):
-        self.assertRaises(TypeError, write, self.channel_write, self.frame1, func=1)
+        self.assertRaises(
+            TypeError, write, self.channel_write, self.frame1, func=1)
 
     def test_write_faulty_arguments_params(self):
-        self.assertRaises(TypeError, write, self.channel_write, self.frame1, params=1)
+        self.assertRaises(
+            TypeError, write, self.channel_write, self.frame1, params=1)

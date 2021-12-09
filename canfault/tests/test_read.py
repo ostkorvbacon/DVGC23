@@ -26,7 +26,8 @@ def tearDownChannel(ch):
 
 
 def reset(ch):
-    """Makes sure there are no Frames left in the message queue on the provided channel."""
+    """Makes sure there are no Frames left in the
+       message queue on the provided channel."""
     frame = read(ch)
     while frame is not None:
         frame = read(ch)
