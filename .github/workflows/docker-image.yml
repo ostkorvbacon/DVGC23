@@ -30,10 +30,7 @@ jobs:
       run: docker build . --file Dockerfile --tag dockertest
 
     - name: Run the Docker image
-      run: docker run --privileged --rm -i dockertest
-      
-    - name: Check dir content
-      run: ls canfault
+      run: docker run --privileged --rm -i dockertest && ls canfault
       
     - name: Archive code coverage results
       uses: actions/upload-artifact@v2
