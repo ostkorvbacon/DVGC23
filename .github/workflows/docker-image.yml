@@ -29,8 +29,6 @@ jobs:
       with:
         context: .
         file: Dockerfile
-        #builder: docker build
-        #push: true
         tags: dockertest
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
@@ -45,18 +43,13 @@ jobs:
         cd html_coverage
         dir
         pwd
-        sudo echo 'testing_artifacts' > test.html
+        sudo touch test.html
         ls
         cd ..
         cd ..
-     # docker load --input /tmp/myimage.tar
-    #- name: Run the Docker image
-    #  run: docker run --privileged --rm -i dockertest && ls canfault
     # uploading files to artifact, /home/runner/work/DVGC23/DVGC23/tmp/html_coverage alt ${GITHUB_WORKSPACE}/tmp/html_coverage/
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
         name: html_coverage
         path: tmp/html_coverage
-   # - name: Build the Docker image
-   #   run: docker build . --file Dockerfile --tag dockertest
