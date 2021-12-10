@@ -45,7 +45,7 @@ jobs:
         cd html_coverage
         dir
         pwd
-        echo 'testing_artifacts' > test.html
+        sudo echo 'testing_artifacts' > test.html
         ls
         cd ..
         cd ..
