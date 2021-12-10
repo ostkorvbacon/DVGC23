@@ -53,6 +53,6 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: html_coverage
-        path: ${GITHUB_WORKSPACE}/tmp/html_coverage/
+        path: /home/runner/work/DVGC23/DVGC23/tmp/html_coverage/
    # - name: Build the Docker image
    #   run: docker build . --file Dockerfile --tag dockertest
