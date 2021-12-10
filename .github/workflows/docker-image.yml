@@ -40,6 +40,11 @@ jobs:
         docker load --input /tmp/myimage.tar
         docker run -di -P --rm --privileged -v ${GITHUB_WORKSPACE}/tmp/html_coverage/:/canfault/coverage_html_report/ dockertest
         dir
+        cd tmp
+        dir
+        cd html_coverage
+        dir
+        pwd
      # docker load --input /tmp/myimage.tar
     #- name: Run the Docker image
     #  run: docker run --privileged --rm -i dockertest && ls canfault
