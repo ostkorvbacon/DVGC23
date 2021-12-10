@@ -36,7 +36,7 @@ jobs:
     - name: Load and Run docker
       run: |
         docker load --input /tmp/myimage.tar
-        sudo docker run -di -P --rm --privileged -v ${GITHUB_WORKSPACE}/tmp/html_coverage/:/canfault/coverage_html_report/:rwx dockertest
+        sudo docker run -di -P --rm --privileged -v ${GITHUB_WORKSPACE}/tmp/html_coverage/:/canfault/coverage_html_report/:rw dockertest
         dir
         cd tmp
         dir
