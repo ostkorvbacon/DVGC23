@@ -45,6 +45,7 @@ jobs:
         cd html_coverage
         dir
         pwd
+        ls
      # docker load --input /tmp/myimage.tar
     #- name: Run the Docker image
     #  run: docker run --privileged --rm -i dockertest && ls canfault
@@ -53,6 +54,6 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: html_coverage
-        path: /home/runner/work/DVGC23/DVGC23/tmp/html_coverage/
+        path: /home/runner/work/DVGC23/DVGC23/tmp/html_coverage/index.html
    # - name: Build the Docker image
    #   run: docker build . --file Dockerfile --tag dockertest
