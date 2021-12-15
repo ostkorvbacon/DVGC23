@@ -40,9 +40,8 @@ jobs:
       uses: addnab/docker-run-action@v3
       with:
         image: dockertest:latest
-        options: -di -P --rm --privileged 
-        volume: ${{ github.workspace }}/tmp/:/canfault/:rw
-        #-v ${{ github.workspace }}/tmp/:/canfault/:rw
+        options: -di -P --privileged -v ${{ github.workspace }}/tmp/:/canfault/:rw
+        # --rm
     - name: Test, look for files
       run: |
         dir
