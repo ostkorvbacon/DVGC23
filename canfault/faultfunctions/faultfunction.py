@@ -154,3 +154,6 @@ def insert(frame, params=[]):
     new_frame = Frame(frame_id, [data], flags=canlib.MessageFlag.EXT)
     logging.debug("End")
     return[new_frame, frame]
+
+def drop(frame,params=[]):
+    return None
