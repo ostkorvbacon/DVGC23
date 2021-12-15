@@ -40,7 +40,7 @@ jobs:
       uses: addnab/docker-run-action@v3
       with:
         image: dockertest:latest
-        options: -di -P --rm --privileged -v ${GITHUB_WORKSPACE}/tmp/:/canfault/:rw
+        options: -di -P --rm --privileged -v ${{ github.workspace }}/tmp/:/canfault/:rw
     # uploading files to artifact, /home/runner/work/DVGC23/DVGC23/tmp/html_coverage alt ${GITHUB_WORKSPACE}/tmp/html_coverage/
     - name: Upload artifact
       uses: actions/upload-artifact@v2
