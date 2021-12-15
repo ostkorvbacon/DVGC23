@@ -30,26 +30,15 @@ jobs:
         context: .
         file: Dockerfile
         tags: dockertest
+        push: false
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
         outputs: type=docker,dest=/tmp/myimage.tar
-    - name: Load and Run docker
-      run: |
-        docker load --input /tmp/myimage.tar
-        sudo docker run -di -P --rm --privileged -v ${GITHUB_WORKSPACE}/tmp/:/canfault/:rw dockertest
-        dir
-        cd tmp
-        dir
-        cd ..
-        cd canfault
-        dir
-        cd coverage_html_report
-        dir
-        pwd
-        sudo touch test.html
-        ls
-        cd ..
-        cd ..
+    - name: Run docker
+      uses: addnab/docker-run-action@v3
+      with:
+        image: test-image:latest
+        options: -di -P --rm --privileged -v ${GITHUB_WORKSPACE}/tmp/:/canfault/:rw
     # uploading files to artifact, /home/runner/work/DVGC23/DVGC23/tmp/html_coverage alt ${GITHUB_WORKSPACE}/tmp/html_coverage/
     - name: Upload artifact
       uses: actions/upload-artifact@v2
