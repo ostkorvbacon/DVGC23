@@ -22,6 +22,10 @@ class Demo:
     def demo_write_duplicate(self):
         """Demo duplicate on write."""
         self.transceiver.transmit(faultfunction.duplicate)
+    
+    def demo_write_drop(self):
+        """Demo duplicate on write."""
+        self.transceiver.transmit(faultfunction.drop)
 
     def demo_write_corrupt(self):
         """Demo corrupt on write."""
@@ -45,6 +49,10 @@ class Demo:
     def demo_read_duplicate(self):
         """Demo duplicate on read."""
         self.receiver.receive(func=faultfunction.duplicate)
+
+    def demo_read_drop(self):
+        """Demo duplicate on write."""
+        self.transceiver.transmit(faultfunction.drop)
 
     def demo_read_corrupt(self):
         """Demo corrupt on read."""
@@ -93,6 +101,10 @@ class Demo:
             self.demo_write_insert()
             self.receiver.receive()
 
+            print("-----------Drop------------")
+            self.demo_write_drop()
+            self.receiver.receive()
+
             print("\n------------------------------------------------------------------------------------------")
             print("Faults on read:")
             print("------------------------------------------------------------------------------------------")
@@ -117,5 +129,9 @@ class Demo:
             print("----------Insert-----------")
             self.transceiver.transmit()
             self.demo_read_insert()
+
+            print("-----------Drop------------")
+            self.demo_read_drop()
+            self.receiver.receive()
 
             print("_________________________________________End demo_________________________________________\n")
