@@ -40,6 +40,7 @@ jobs:
         dir
         cd tmp
         dir
+        cd ..
         cd canfault
         dir
         cd coverage_html_report
@@ -47,7 +48,6 @@ jobs:
         pwd
         sudo touch test.html
         ls
-        cd ..
         cd ..
         cd ..
     # uploading files to artifact, /home/runner/work/DVGC23/DVGC23/tmp/html_coverage alt ${GITHUB_WORKSPACE}/tmp/html_coverage/
