@@ -41,6 +41,12 @@ jobs:
       with:
         image: dockertest:latest
         options: -di -P --rm --privileged -v ${{ github.workspace }}/tmp/:/canfault/:rw
+    - name: Test, look for files
+      run: |
+        dir
+        cd tmp
+        dir
+        ls
     # uploading files to artifact, /home/runner/work/DVGC23/DVGC23/tmp/html_coverage alt ${GITHUB_WORKSPACE}/tmp/html_coverage/
     - name: Upload artifact
       uses: actions/upload-artifact@v2
