@@ -156,4 +156,14 @@ def insert(frame, params=[]):
     return[new_frame, frame]
 
 def drop(frame,params=[]):
+    """Drops the Frame it recives.
+
+    :param frame: canlib Frame to follow the inserted frame
+    :type frame: canlib.Frame
+    :param params: not used, defaults to []
+    :type params: optional
+
+    :rtype: None
+    :return: None
+    """
     return None
