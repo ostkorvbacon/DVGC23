@@ -44,7 +44,7 @@ jobs:
     - name: Test, look for files
       run: |
         dir
-        cd tmp
+        cd semicolon_delimited_script
         dir
         ls
     # uploading files to artifact, /home/runner/work/DVGC23/DVGC23/tmp/html_coverage alt ${GITHUB_WORKSPACE}/tmp/html_coverage/
