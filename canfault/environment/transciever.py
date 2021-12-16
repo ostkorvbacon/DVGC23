@@ -31,4 +31,4 @@ class Transceiver:
         print("Transmitting:")
         printframe.print_frame(frame)
         writefault.write(self.channel, frame, func, params)
-
+    

@@ -1,5 +1,6 @@
 import random
 from canlib import kvadblib
+from . import framefactory
 
 class MessageFactory:
     """Creates and insertes messages with randomized data and signals"""
@@ -7,8 +8,9 @@ class MessageFactory:
         self.str_min = 1
         self.str_max = 64
         self.min = 0
-        self.max = 1023
+        self.max = 255
         self.data_amount = 8
+        self.factory = framefactory.FrameFactory()
     
     def random_name(self):
         """Creates a randomized name of a randomized length between 0 and 255. 
@@ -28,14 +30,17 @@ class MessageFactory:
         str += '\0'
         return str
 
-    def set_message_signal(self, message, 
-                            signal_type=kvadblib.SignalType.FLOAT, 
+    def set_message_signal(self, 
+                            message, 
+                            signal_type=kvadblib.SignalType.UNSIGNED, 
                             startbit=0, 
                             length=32, 
                             min=0, 
-                            max=100, 
+                            max=2047, 
                             unit=' m', 
-                            comment='No comment' ):
+                            comment='No comment',
+                            name = 'Name' 
+                            ):
         """Set the signal of a message with possibly random data
         
         :param message: Message to assign the signal to.
@@ -55,22 +60,30 @@ class MessageFactory:
         :param comment: Comment describing the contents of the signal. Defaults to 'No comment'.
         :type comment: String
         """
-        message.new_signal(
-            name = self.random_name(),
-            type = signal_type,
-            size = kvadblib.ValueSize( startbit = startbit, length = length),
-            limits = kvadblib.ValueLimits(min = min, max = max),
-            unit = unit,
-            comment = comment
+        if name == 'Name':
+            name = self.random_name()
+        
+        signal = message.new_signal(
+            name=name,
+            type=signal_type,
+            byte_order=kvadblib.SignalByteOrder.INTEL,
+            mode=kvadblib.SignalMultiplexMode.MUX_INDEPENDENT,
+            size=kvadblib.ValueSize(startbit = startbit, length = length),
+            limits=kvadblib.ValueLimits(min = min, max = max),
+            unit=unit,
+            comment=comment
         )
-    
-    def create_random_message(self, db, name = 'Name', flag = 0, dlc = None, comment = None):
+        return signal
+
+    def create_random_message(self, id, db, name='Name', signal_name='Name', flag=0, dlc=8, comment=None):
         """Creates a single messages with random data, returns the message
         
         :param db: Dbc to add the message to.
         :type db: kvadblib.Dbc
         :param name: Name of the message. Defaults to 'Name'
         :type name: String
+        :param signal_name: Name of the signal. Defaults to 'Name'
+        :type signal_name: String
         :param flag: The message flags. Defaults to 0
         :type flag: kvadblib.MessageFlag
         :param dlc: The DLC field. Defaults to 0.
@@ -82,10 +95,12 @@ class MessageFactory:
         """
         if name == 'Name':
             name = self.random_name()
-        id = random.randint(self.min, self.max)
+        if signal_name == 'Name':
+            signal_name = self.random_name()
 
         message = db.new_message(name, id, flags = flag, dlc = dlc, comment = comment)
-        self.set_message_signal(message)
+        self.set_message_signal(message, name=signal_name)
+
         return message
 
     def create_messages(self, db, number_of_messages):
@@ -96,8 +111,11 @@ class MessageFactory:
         :param number_of_messages: The number of messages to be created.
         :type number of messages: int
         """
+
+        for _ in range(number_of_messages):
+            self.factory.create_random_frame()
         if not isinstance(number_of_messages, int):
             raise(TypeError("number_of_messages needs to be an int"))
-        for _ in range(number_of_messages):
+        for i in range(number_of_messages):
             message = self.create_random_message(db)
             self.set_message_signal(message)
