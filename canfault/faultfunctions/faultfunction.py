@@ -33,7 +33,6 @@ def set_stored(frame):
         logging.debug("End")
         return None, 0
 
-
 def bit_filler(frame_as_bits=bitarray("0000 0000")):
     logging.debug("Start")
     bit_filler = bitarray(endian='big')
@@ -42,7 +41,6 @@ def bit_filler(frame_as_bits=bitarray("0000 0000")):
         frame_as_bits.extend(bit_filler)
     logging.debug("End")
     return frame_as_bits
-
 
 def corrupt(frame, params=[]):
     logging.debug("Start")
@@ -53,27 +51,23 @@ def corrupt(frame, params=[]):
     else:
         print("start {}  lenght {}". format(start, lenght))
         logging.info("Parameters: start %d  lenght %d", start, lenght)
-
         if(frame.data is None):
             frame_as_bits = util.zeros(64)
+            logging.error("There was no data in the frame.")
         else:
             frame_as_bytes = bytes(frame.data)
             frame_as_bits = bitarray(endian='big')
             frame_as_bits.frombytes(frame_as_bytes)
             frame_as_bits = bit_filler(frame_as_bits)
-
         for i in range(start, lenght + start):
             bitarray.invert(frame_as_bits, i)
-
         frame_as_bytes = frame_as_bits.tobytes()
         frame.data = frame_as_bytes
     logging.debug("End")
     return frame
 
-
 def delay(frame, params=[]):
     logging.debug("Start")
-
     """Delays a Frame by a number of seconds, returns the Frame.
 
     :param frame: canlib Frame to be delayed
@@ -91,7 +85,6 @@ def delay(frame, params=[]):
     time.sleep(t)
     logging.debug("End")
     return frame
-
 
 def duplicate(frame, params=[]):
     logging.debug("Start")
@@ -115,7 +108,6 @@ def duplicate(frame, params=[]):
     logging.debug("End")
     return f_list
 
-
 def swap(frame, params=[]):
     logging.debug("Start")
     """Swaps the order of two Frames and returns them in a list.
@@ -135,7 +127,6 @@ def swap(frame, params=[]):
     else:
         logging.debug("End")
         return old_frame
-
 
 def insert(frame, params=[]):
     logging.debug("Start")
