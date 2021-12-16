@@ -7,51 +7,73 @@ from environment import printframe
 import logging
 import random
 from bitarray import bitarray
+import numpy
+import struct
 
 from canlib.kvadblib.signal import Signal
 
-def load_corrupt(frame, bit):
-    printframe.print_frame(frame)
-    frame_as_bytes = bytes(frame.data)
-    frame_as_bits = bitarray(endian='big')
-    frame_as_bits.frombytes(frame_as_bytes)
+def corrupt_signal_data(data, bit):
+    """
+    Function flipping a random bit of the signal data.
 
-    bitarray.invert(frame_as_bits, bit)
+    :param data: The data to be corrupted.
+    :type data: bytearray
+    :param bit: The index of the bit to be corrupted
+    :type bit: int
 
-    frame_as_bytes = frame_as_bits.tobytes()
-    frame.data = frame_as_bytes
+    :return: The corrupted data
+    :rtype: bytearray
+    """
+    data_as_bytes = bytes(data)
+    data_as_bits = bitarray(endian='big')
+    data_as_bits.frombytes(data_as_bytes)
 
-    return frame
+    bitarray.invert(data_as_bits, bit)
 
-def corrupt_message(frame, params):
+    data_as_bytes = data_as_bits.tobytes()
+    data = data_as_bytes
+
+    return data
+
+def corrupt_signal(signal_name, database, channel):
     """
     Function for corrupting a random bit in the frame.
 
-    
-    :param params: [0] = Message name, [1] = signal name, [2] = db
-    :type params: List
+    :param database: Dbc where to look for the signal
+    :type database: kvadblib.Dbc
+    :param signal: Name of the signal to be corrupted
+    :type signal_name: String
 
-    :return: The corrupted frame
-    :rtype: canlib.Frame
+    :return: The corrupted signal
+    :rtype: kvadblib.Signal
     """
-    db = params[2]
-    message = db.get_message_by_name(params[0])
-    signal = message.get_signal(params[1])
+    frame = channel.read()
+    bound_message = database.interpret(frame)
+    signal = ''
+    for message in database.messages():
+        for signal_instance in message.signals():
+            if signal_instance.name == signal_name:
+                signal = signal_instance
+                message_corrupt = message
+    
+    for signals in bound_message:
+        if signals.name == signal_name:
+            signal = signals
+
     start = signal.size.startbit
     length = signal.size.length
 
-    flip_bit = random.randint(start, start+length)
+    data = frame.data
+    
+    flip_bit = random.randint(start, start+length-1)
     print(start)
     print(length)
     print(flip_bit)
-    #message.data = load_corrupt(message.data, flip_bit)
-    '''for ... in database, For signals in frame. Leta upp alla signaler i en frame. Anta att namn  på signaler är unika. 
-    parametrar in skall vara signal name och ev. databs. De har ett ramverk där databasen är tillgänglig så den behöver inte vara ett argument'''
-    print("id")
-    print(message)
-    print(signal)
+    print(data)
+    new_data = corrupt_signal_data(data, flip_bit)
+    print(new_data)
     
-    return message.asframe()
+    return frame
 
 
     

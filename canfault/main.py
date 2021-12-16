@@ -52,11 +52,11 @@ if __name__ == '__main__':
     """Runs the setup for demo and runs the demo."""
     channel_transmit = setUpChannel(channel=0)
     channel_receive = setUpChannel(channel=1)
-   
+
     transceiver = transciever.Transceiver(channel_transmit)
     receiver = receiver.Receiver(channel_receive)
     demo = demo.Demo(transceiver, receiver)
-    
+
     demo.demo_all(1)
 
     tearDownChannel(channel_transmit)
