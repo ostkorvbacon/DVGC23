@@ -2,6 +2,7 @@ import unittest
 from canlib import canlib, Frame
 from faultfunctions import faultfunction
 
+
 class TestSwap(unittest.TestCase):
     """Tests the faultfuncton.swap function."""
     def reset_swap(self):

@@ -44,4 +44,8 @@ ADD canfault canfault
 
 WORKDIR /canfault
 
+RUN pip install sphinx-rtd-theme \
+    && cd docs \
+    && make html
+
 CMD ["/bin/sh", "run_tests.sh"]

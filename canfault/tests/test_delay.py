@@ -3,6 +3,7 @@ from canlib import canlib, Frame
 from faultfunctions import faultfunction
 from timeit import default_timer as timer
 
+
 class TestDelay(unittest.TestCase):
     """Tests the faultfuncton.delay function."""
     def setUp(self):
@@ -16,7 +17,7 @@ class TestDelay(unittest.TestCase):
             data=[1],
             flags=canlib.MessageFlag.EXT
         )
-    
+
     def test_delay_one_sec(self):
         start = timer()
         ret_frame = faultfunction.delay(self.frame1, [1])
