@@ -2,6 +2,7 @@ from canlib import kvadblib
 import random
 from canlib.kvadblib.framebox import FrameBox
 from . import messagefactory
+from faultfunctions import signalfault
 
 class SetupSignal():
     def __init__(self, database_size):
@@ -36,11 +37,19 @@ class SetupSignal():
             for signal in message:
                 print('\n {}'.format(signal))
 
-    def signal_transmit(self, channel):
+    def signal_transmit(self, channel, channel1):
         for frame in self.framebox.frames():
             print("Transmitting: ")
             print(frame)
+            message = self.db.interpret(frame)
             channel.write(frame)
+            for messages in self.db:
+                if message._frame.id == messages.id:
+                    for signal in messages.signals():
+                        print("SIGNAL")
+                        print(signal.name)
+                        new_frame = signalfault.corrupt_signal(signal.name, self.db, channel1)
+                        channel.write(new_frame)
 
     def signal_receive(self, channel):
         
