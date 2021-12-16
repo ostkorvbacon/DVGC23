@@ -2,6 +2,7 @@ from canlib import kvadblib
 import random
 from canlib.kvadblib.framebox import FrameBox
 from . import messagefactory
+from . import printframe
 from faultfunctions import signalfault
 
 class SetupSignal():
@@ -21,11 +22,15 @@ class SetupSignal():
             message = self.message_factory.create_random_message(db=self.db, id=i,name=c, signal_name=chr(ord(c)+1))
             c = chr(ord(c)+1)
         self.print_db()
+        print("\nMessages added to FrameBox: ")
         for message in self.db:
+            print(message)
             self.framebox.add_message(message)
+        print()
         for signal in self.framebox.signals():
-            print(signal.name)
             signal.phys = random.randint(self.min, self.max)
+            print(signal)
+        print()
         
 
 
@@ -37,19 +42,29 @@ class SetupSignal():
             for signal in message:
                 print('\n {}'.format(signal))
 
-    def signal_transmit(self, channel, channel1):
+    def signal_transmit(self, channel, channel_read):
         for frame in self.framebox.frames():
             print("Transmitting: ")
-            print(frame)
-            message = self.db.interpret(frame)
+            printframe.print_frame(frame)
             channel.write(frame)
-            for messages in self.db:
-                if message._frame.id == messages.id:
-                    for signal in messages.signals():
-                        print("SIGNAL")
-                        print(signal.name)
-                        new_frame = signalfault.corrupt_signal(signal.name, self.db, channel1)
-                        channel.write(new_frame)
+            # message = self.db.get_message(frame.id)
+            # bound_message = self.framebox.message(message.name)
+            bound_message = self.db.interpret(frame)
+            for bound_signal in bound_message:
+                print("SIGNAL")
+                print(bound_signal)
+                bound_message = signalfault.corrupt_signal(bound_signal.signal.name, self.db, channel_read)
+
+            # channel.write(bound_message._frame)
+            
+            # message = self.db.interpret(frame)
+            # for messages in self.db:
+            #     if message._frame.id == messages.id:
+            #         for signal in messages.signals():
+            #             print("SIGNAL")
+            #             print(signal.name)
+            #             new_frame = signalfault.corrupt_signal(signal.name, self.db, channel1)
+            #             channel.write(new_frame)
 
     def signal_receive(self, channel):
         

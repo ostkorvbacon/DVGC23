@@ -49,31 +49,38 @@ def corrupt_signal(signal_name, database, channel):
     """
     frame = channel.read()
     bound_message = database.interpret(frame)
-    signal = ''
-    for message in database.messages():
-        for signal_instance in message.signals():
-            if signal_instance.name == signal_name:
-                signal = signal_instance
-                message_corrupt = message
+    # signal = ''
+    # for message in database.messages():
+    #     for signal_instance in message.signals():
+    #         if signal_instance.name == signal_name:
+    #             signal = signal_instance
+    #             message_corrupt = message
     
-    for signals in bound_message:
-        if signals.name == signal_name:
-            signal = signals
+    # for signals in bound_message:
+    #     if signals.name == signal_name:
+    #         signal = signals
 
-    start = signal.signal.size.startbit
-    length = signal.signal.size.length
-
+    message = database.get_message(frame.id)
+    signal = message.get_signal_by_name(signal_name)
+    start = signal.size.startbit
+    length = signal.size.length
     data = frame.data
+
+    # start = signal.signal.size.startbit
+    # length = signal.signal.size.length
     
     flip_bit = random.randint(start, start+length-1)
-    print(start)
-    print(length)
-    print(flip_bit)
-    print(data)
+    print("Start bit: ", start)
+    print("Length: ", length)
+    print("Bit to flip: ", flip_bit)
+    #print(data)
+    printframe.print_frame(bound_message._frame)
     new_data = corrupt_signal_data(data, flip_bit)
-    print(new_data)
+    #print(new_data)
+    bound_message._data = new_data
+    printframe.print_frame(bound_message._frame)
     
-    return frame
+    return bound_message
 
 
     
