@@ -4,16 +4,9 @@ canfault.environment package
 Submodules
 ----------
 
-canfault.environment.database module
-------------------------------------
-
-.. automodule:: canfault.environment.database
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 canfault.environment.demo module
 --------------------------------
+
 
 .. automodule:: canfault.environment.demo
    :members:

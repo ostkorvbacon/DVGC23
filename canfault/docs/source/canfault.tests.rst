@@ -12,14 +12,6 @@ canfault.tests.test\_corrupt module
    :undoc-members:
    :show-inheritance:
 
-canfault.tests.test\_database module
-------------------------------------
-
-.. automodule:: canfault.tests.test_database
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 canfault.tests.test\_delay module
 ---------------------------------
 
