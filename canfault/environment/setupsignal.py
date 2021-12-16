@@ -37,7 +37,7 @@ class SetupSignal():
             for signal in message:
                 print('\n {}'.format(signal))
 
-    def signal_transmit(self, channel):
+    def signal_transmit(self, channel, channel1):
         for frame in self.framebox.frames():
             print("Transmitting: ")
             print(frame)
@@ -48,7 +48,7 @@ class SetupSignal():
                     for signal in messages.signals():
                         print("SIGNAL")
                         print(signal.name)
-                        new_frame = signalfault.corrupt_signal(signal.name, self.db, channel)
+                        new_frame = signalfault.corrupt_signal(signal.name, self.db, channel1)
                         channel.write(new_frame)
 
     def signal_receive(self, channel):

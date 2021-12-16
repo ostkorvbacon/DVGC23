@@ -70,8 +70,8 @@ if __name__ == '__main__':
 
     signalsetup = setupsignal.SetupSignal(10)
     signalsetup.setup()
-    signalsetup.signal_transmit(channel_signaltransmit)
-    signalsetup.signal_receive(channel_signalreceive)
+    signalsetup.signal_transmit(channel_signaltransmit, channel_signalreceive)
+    signalsetup.signal_receive(channel_signalreceive, channel_signaltransmit)
 
     tearDownChannel(channel_signaltransmit)
     tearDownChannel(channel_signalreceive)

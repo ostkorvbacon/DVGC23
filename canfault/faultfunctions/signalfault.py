@@ -60,8 +60,8 @@ def corrupt_signal(signal_name, database, channel):
         if signals.name == signal_name:
             signal = signals
 
-    start = signal.size.startbit
-    length = signal.size.length
+    start = signal.signal.size.startbit
+    length = signal.signal.size.length
 
     data = frame.data
     
