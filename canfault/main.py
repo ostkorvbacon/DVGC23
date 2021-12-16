@@ -2,10 +2,12 @@ from canlib import canlib, Frame, kvadblib
 from canlib.canlib import ChannelData
 from canlib.kvadblib import message
 from readwrite.writefault import write
-from environment import transciever, receiver, demo, messagefactory, framefactory, printframe
+from environment import transciever, receiver
+from environment import demo, messagefactory, framefactory, printframe
 from faultfunctions import signalfault
 from environment import setupsignal
 import logging
+
 
 def setUpChannel(channel=0,
                  openFlags=canlib.canOPEN_ACCEPT_VIRTUAL,
@@ -52,19 +54,19 @@ if __name__ == '__main__':
     """Runs the setup for demo and runs the demo."""
     channel_transmit = setUpChannel(channel=0)
     channel_receive = setUpChannel(channel=1)
-   
+
     transceiver = transciever.Transceiver(channel_transmit)
     receiver = receiver.Receiver(channel_receive)
     demo = demo.Demo(transceiver, receiver)
-    
+
     demo.demo_all(1)
 
     tearDownChannel(channel_transmit)
     tearDownChannel(channel_receive)
 
-    #SIGNAL
-    channel_signaltransmit = setUpChannel(channel = 0)
-    channel_signalreceive = setUpChannel(channel = 1)
+    # SIGNAL
+    channel_signaltransmit = setUpChannel(channel=0)
+    channel_signalreceive = setUpChannel(channel=1)
 
     signalsetup = setupsignal.SetupSignal(10)
     signalsetup.setup()

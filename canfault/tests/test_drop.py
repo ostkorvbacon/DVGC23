@@ -14,4 +14,4 @@ class TestDuplicate(unittest.TestCase):
 
     def test_drop(self):
         r = faultfunction.drop(self.frame)
-        self.assertEqual(r,None)
+        self.assertEqual(r, None)
