@@ -1,13 +1,93 @@
+from faultfunctions import faultfunction
 from canlib import canlib, Frame, kvadblib
 from canlib.canlib import ChannelData
 from canlib.kvadblib import message
 from readwrite.writefault import write
+from readwrite.readfault import read
 from environment import transciever, receiver
 from environment import demo, messagefactory, framefactory, printframe
 from faultfunctions import signalfault
 from environment import setupsignal
 import logging
+import threading
+from time import sleep
 
+class CanRxThread(threading.Thread):
+    def __init__(self, channel, demo, test_case):
+        threading.Thread.__init__(self)
+        self._running = True
+        self._ch = channel
+        self._test_case = test_case
+        self._demo = demo
+ 
+    def stop(self):
+        self._running = False
+ 
+    def run(self):
+        if(self._test_case == "write"):
+            while self._running:
+                try:
+                    frame = read(self._ch)
+                    print("Reading from loop")
+                    printframe.print_frame(frame)
+                except Exception:
+                    print("Timeout error")
+        elif(self._test_case == "read"):
+            print("-----------------------Read--------------------------------")
+            print("Duplicate...")
+            self._demo.demo_read_duplicate()
+            sleep(0.050)
+            print("Corrupt...")
+            self._demo.demo_read_corrupt()
+            sleep(0.050)
+            print("Drop...")
+            self._demo.demo_read_drop()
+            sleep(0.050)
+            print("Insert...")
+            self._demo.demo_read_insert()
+            sleep(0.050)
+            print("Swap...")
+            self._demo.demo_read_swap()
+            sleep(0.050)
+            print("Delay...")
+            self._demo.demo_read_delay()
+            sleep(1)
+
+class CanTxThread(threading.Thread):
+    def __init__(self, channel, demo, test_case):
+        threading.Thread.__init__(self)
+        self._running = True
+        self._ch = channel
+        self._demo = demo
+        self._test_case = test_case
+ 
+    def stop(self):
+        self._running = False
+ 
+    def run(self):
+        if(self._test_case == "write"):
+            print("Duplicate...")
+            self._demo.demo_write_duplicate()
+            sleep(0.050)
+            print("Corrupt...")
+            self._demo.demo_write_corrupt()
+            sleep(0.050)
+            print("Drop...")
+            self._demo.demo_write_drop()
+            sleep(0.050)
+            print("Insert...")
+            self._demo.demo_write_insert()
+            sleep(0.050)
+            print("Swap...")
+            self._demo.demo_write_swap()
+            sleep(0.050)
+            print("Delay...")
+            self._demo.demo_write_delay()
+            sleep(1)
+        elif(self._test_case == "read"):
+            while(self._running):
+                demo.transceiver.transmit()
+                sleep(1)
 
 def setUpChannel(channel=0,
                  openFlags=canlib.canOPEN_ACCEPT_VIRTUAL,
@@ -59,7 +139,33 @@ if __name__ == '__main__':
     receiver = receiver.Receiver(channel_receive)
     demo = demo.Demo(transceiver, receiver)
 
-    demo.demo_all(1)
+    # Testing write
+    # Setup reader
+    rx_thread = CanRxThread(channel_receive, demo, "write")
+    rx_thread.start()
+
+    # Setup writer
+    tx_thread = CanTxThread(channel_transmit, demo, "write")
+    tx_thread.start()
+
+    sleep(5)
+
+    rx_thread.stop()
+    tx_thread.stop()
+
+    # Testing read
+    # Setup reader
+    rx_thread = CanRxThread(channel_receive, demo, "read")
+    rx_thread.start()
+
+    # Setup writer
+    tx_thread = CanTxThread(channel_transmit, demo, "read")
+    tx_thread.start()
+
+    sleep(20)
+
+    rx_thread.stop()
+    tx_thread.stop()
 
     tearDownChannel(channel_transmit)
     tearDownChannel(channel_receive)
@@ -68,10 +174,10 @@ if __name__ == '__main__':
     channel_signaltransmit = setUpChannel(channel=0)
     channel_signalreceive = setUpChannel(channel=1)
 
-    signalsetup = setupsignal.SetupSignal(2)
-    signalsetup.setup()
-    signalsetup.signal_transmit(channel_signaltransmit, channel_signalreceive)
-    signalsetup.signal_receive(channel_signalreceive)#, channel_signaltransmit)
+    # signalsetup = setupsignal.SetupSignal(10)
+    # signalsetup.setup()
+    # signalsetup.signal_transmit(channel_signaltransmit, channel_signalreceive)
+    # signalsetup.signal_receive(channel_signalreceive, channel_signaltransmit)
 
     tearDownChannel(channel_signaltransmit)
     tearDownChannel(channel_signalreceive)

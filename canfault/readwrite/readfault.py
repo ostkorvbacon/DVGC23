@@ -37,7 +37,7 @@ def read(channel, func=None, frame=None, params=[]):
     while True:
         try:
             if(frame is None):
-                frame = channel.read()
+                frame = channel.read(2000)
             if(func is None):
                 return frame
             return func(frame, params)
