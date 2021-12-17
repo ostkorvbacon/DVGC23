@@ -30,7 +30,8 @@ class Receiver:
             raise(TypeError("Object params passed to receive needs to be a List of parameters"))
         
         frame = readfault.read(channel=self.channel, func=func, params=params)
-        while frame is not None:
+        print(frame)
+        while(frame is not None):
             print("Receiving:")
             if isinstance(frame, List):
                 for i in frame:

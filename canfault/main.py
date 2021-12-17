@@ -7,8 +7,9 @@ from environment import demo, messagefactory, framefactory, printframe
 from faultfunctions import signalfault
 from environment import setupsignal
 import logging
-
-
+import threading
+from time import sleep
+from faultfunctions import faultfunction
 def setUpChannel(channel=0,
                  openFlags=canlib.canOPEN_ACCEPT_VIRTUAL,
                  bitrate=canlib.canBITRATE_500K,
@@ -45,6 +46,26 @@ def tearDownChannel(ch):
     ch.close()
     logging.debug("End")
 
+class CanRxThread(threading.Thread):
+    def __init__(self, channel):
+        threading.Thread.__init__(self)
+        self._running = True
+        self._ch = channel
+
+    def stop(self):
+        self._running = False
+ 
+    def run(self):
+        while self._running:
+            try:
+                #print("är jag här")
+                frame = self._ch.read(100)
+                if frame:
+                    print(frame,"hittade the")
+            except Exception:
+                print("Timeout error")
+
+
 if __name__ == '__main__':
     """Setting up logger"""
     logging.basicConfig(filename='logging.log', level=logging.DEBUG,
@@ -52,26 +73,72 @@ if __name__ == '__main__':
                         datefmt='%Y/%m/%d %I:%M')
 
     """Runs the setup for demo and runs the demo."""
-    channel_transmit = setUpChannel(channel=0)
-    channel_receive = setUpChannel(channel=1)
+    #channel_transmit = setUpChannel(channel=0)
+    #channel_receive = setUpChannel(channel=1)
 
-    transceiver = transciever.Transceiver(channel_transmit)
-    receiver = receiver.Receiver(channel_receive)
+    rx_ch = setUpChannel(0)
+    tx_ch = setUpChannel(1)
+
+    # Setup reader
+    rx_thread = CanRxThread(rx_ch)
+
+    transceiver = transciever.Transceiver(tx_ch)
+
     demo = demo.Demo(transceiver, receiver)
 
-    demo.demo_all(1)
+    rx_thread.start()
+
+
+    demo.demo_write_drop()
+    sleep(1)
+    demo.demo_write_insert()
+    sleep(1)
+
+    demo.demo_write_corrupt()
+    sleep(1)
+    demo.demo_write_delay()
+    sleep(1)
+    demo.demo_write_swap()
+    sleep(1)
+    demo.demo_write_duplicate()
+    sleep(1)
+
+    #demo.demo_read_delay()
+
+    #sleep(1)
+    rx_thread.stop()
+    #tx_thread.stop()
+    pass
+
+    #demo.demo_write_insert()
+    #transceiver.transmit()
+    
+    
+    #transceiver = transciever.Transceiver(channel_transmit)
+    
+    '''
+    #receiver = receiver.Receiver(channel_receive)
+    
+
+    demo = demo.Demo(transceiver, receiver)
+
+    #demo.demo_all(1)
+    demo.demo_write_insert()
+    transceiver.transmit()
+    demo.demo_read_insert()
 
     tearDownChannel(channel_transmit)
     tearDownChannel(channel_receive)
-
+    
     # SIGNAL
-    channel_signaltransmit = setUpChannel(channel=0)
+    channel_signaltransmit = setUpChannel(channel=0)    
     channel_signalreceive = setUpChannel(channel=1)
 
     signalsetup = setupsignal.SetupSignal(10)
     signalsetup.setup()
     signalsetup.signal_transmit(channel_signaltransmit, channel_signalreceive)
     signalsetup.signal_receive(channel_signalreceive, channel_signaltransmit)
-
+    
     tearDownChannel(channel_signaltransmit)
     tearDownChannel(channel_signalreceive)
+    '''
