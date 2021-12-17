@@ -7,9 +7,9 @@ from faultfunctions import faultfunction
 
 
 class TestReceiver(unittest.TestCase):
-    
+
     """Tests the environment.receiver function."""
-    
+
     def setUp(self) -> None:
         self.ch = setUpChannel()
         self.ch1 = setUpChannel(1)
