@@ -160,8 +160,11 @@ def insert(frame, params=[]):
     logging.debug("Start")
     frame_id = random.randint(0, 1023)
     data = random.randint(0, 255)
-    new_frame = Frame(frame_id, [data], flags=canlib.MessageFlag.EXT)
+    new_frame = Frame(frame_id, [data],dlc=8 ,flags=canlib.MessageFlag.EXT)
     logging.debug("End")
+    
+    #print(new_frame,frame, "hej")
+
     return[new_frame, frame]
 
 def drop(frame,params=[]):
