@@ -32,7 +32,7 @@ class CanRxThread(threading.Thread):
                     printframe.print_frame(frame)
                 except Exception:
                     print("Timeout error")
-        elif(self._test_case == "read"):
+        elif(self._test_case == "read" and self._running):
             print("-----------------------Read--------------------------------")
             print("Duplicate...")
             self._demo.demo_read_duplicate()
@@ -152,6 +152,9 @@ if __name__ == '__main__':
 
     rx_thread.stop()
     tx_thread.stop()
+
+    rx_thread.join()
+    tx_thread.join()
 
     # Testing read
     # Setup reader
