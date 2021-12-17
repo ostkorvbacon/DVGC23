@@ -1,3 +1,4 @@
+from typing import List
 from faultfunctions import faultfunction
 from canlib import canlib, Frame, kvadblib
 from canlib.canlib import ChannelData
@@ -22,6 +23,15 @@ class CanRxThread(threading.Thread):
  
     def stop(self):
         self._running = False
+
+    def receive(self, func=None, params=[]):
+        frame = read(channel=self._ch, func=func, params=params)
+        print("Received:")
+        if isinstance(frame, Frame):
+            printframe.print_frame(frame)
+        elif isinstance(frame, List):
+            for f in frame:
+                printframe.print_frame(f)
  
     def run(self):
         if(self._test_case == "write"):
@@ -32,26 +42,28 @@ class CanRxThread(threading.Thread):
                     printframe.print_frame(frame)
                 except Exception:
                     print("Timeout error")
-        elif(self._test_case == "read" and self._running):
+        elif(self._test_case == "read"):
             print("-----------------------Read--------------------------------")
             print("Duplicate...")
-            self._demo.demo_read_duplicate()
+            self.receive(func=faultfunction.duplicate)
             sleep(0.050)
             print("Corrupt...")
-            self._demo.demo_read_corrupt()
+            self.receive(func=faultfunction.corrupt, params=[3,10])
             sleep(0.050)
             print("Drop...")
-            self._demo.demo_read_drop()
+            self.receive(func=faultfunction.drop)
             sleep(0.050)
             print("Insert...")
-            self._demo.demo_read_insert()
+            self.receive(func=faultfunction.insert)
             sleep(0.050)
             print("Swap...")
-            self._demo.demo_read_swap()
+            self.receive(func=faultfunction.swap)
+            self.receive(func=faultfunction.swap)
             sleep(0.050)
             print("Delay...")
-            self._demo.demo_read_delay()
+            self.receive(func=faultfunction.delay)
             sleep(1)
+            self._running = False
 
 class CanTxThread(threading.Thread):
     def __init__(self, channel, demo, test_case):
@@ -152,10 +164,8 @@ if __name__ == '__main__':
 
     rx_thread.stop()
     tx_thread.stop()
-
     rx_thread.join()
     tx_thread.join()
-
     # Testing read
     # Setup reader
     rx_thread = CanRxThread(channel_receive, demo, "read")
