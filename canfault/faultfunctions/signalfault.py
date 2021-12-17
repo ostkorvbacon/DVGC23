@@ -27,7 +27,8 @@ def corrupt_signal_data(data, bit):
     data_as_bytes = bytes(data)
     data_as_bits = bitarray(endian='big')
     data_as_bits.frombytes(data_as_bytes)
-
+    print("Corrupting bit {}.".format(bit))
+    print()
     bitarray.invert(data_as_bits, bit)
 
     data_as_bytes = data_as_bits.tobytes()
@@ -43,21 +44,21 @@ def corrupt_signal(signal_name, database, channel):
     :type database: kvadblib.Dbc
     :param signal: Name of the signal to be corrupted
     :type signal_name: String
+    :param channel: Channel to read from
+    :type channel: canlib.Channel
 
-    :return: The corrupted signal
+    :return: BoundMessage with corrupted data
     :rtype: kvadblib.BoundMessage
     """
-    
     frame = channel.read()
 
-    #message_corrupt = ''
     signal = ''
     for message in database.messages():
         for signal_instance in message.signals():
             if signal_instance.name == signal_name:
                 signal = signal_instance
-                #message_corrupt = message
                 break
+
     bound_message = message.bind(frame)
     start = signal.size.startbit
     length = signal.size.length
