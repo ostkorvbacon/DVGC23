@@ -45,40 +45,27 @@ def corrupt_signal(signal_name, database, channel):
     :type signal_name: String
 
     :return: The corrupted signal
-    :rtype: kvadblib.Signal
+    :rtype: kvadblib.BoundMessage
     """
-    frame = channel.read()
-    bound_message = database.interpret(frame)
-    # signal = ''
-    # for message in database.messages():
-    #     for signal_instance in message.signals():
-    #         if signal_instance.name == signal_name:
-    #             signal = signal_instance
-    #             message_corrupt = message
     
-    # for signals in bound_message:
-    #     if signals.name == signal_name:
-    #         signal = signals
+    frame = channel.read()
 
-    message = database.get_message(frame.id)
-    signal = message.get_signal_by_name(signal_name)
+    #message_corrupt = ''
+    signal = ''
+    for message in database.messages():
+        for signal_instance in message.signals():
+            if signal_instance.name == signal_name:
+                signal = signal_instance
+                #message_corrupt = message
+                break
+    bound_message = message.bind(frame)
     start = signal.size.startbit
     length = signal.size.length
     data = frame.data
-
-    # start = signal.signal.size.startbit
-    # length = signal.signal.size.length
     
     flip_bit = random.randint(start, start+length-1)
-    print("Start bit: ", start)
-    print("Length: ", length)
-    print("Bit to flip: ", flip_bit)
-    #print(data)
-    printframe.print_frame(bound_message._frame)
     new_data = corrupt_signal_data(data, flip_bit)
-    #print(new_data)
     bound_message._data = new_data
-    printframe.print_frame(bound_message._frame)
     
     return bound_message
 

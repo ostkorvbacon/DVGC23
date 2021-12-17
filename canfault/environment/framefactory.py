@@ -19,7 +19,8 @@ class FrameFactory:
         for _ in range(self.data_amount):
            datapoint = random.randint(self.min, self.max)
            data.append(datapoint)
-        frame = Frame(id_ = random.randint(0, 255), data = data,dlc=8 ,flags = canlib.MessageFlag.EXT)
+
+        frame = Frame(id_=random.randint(0, 1023), data=data, dlc=8, flags=canlib.MessageFlag.EXT)
         
         return frame
 
