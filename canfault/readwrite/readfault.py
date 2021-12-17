@@ -23,8 +23,8 @@ def read(channel, func=None, frame=None, params=[]):
     :type params: list, optional
     :raises TypeError: if parameters are of the wrong type
 
-    :rtype: canlib.Frame, None
-    :return: frame, None
+    :rtype: canlib.Frame, List, None
+    :return: frame, [frame1, frame2], None
     """
     if func is not None and not isinstance(func, Callable):
         raise(TypeError("The passed func is not a callable!"))
