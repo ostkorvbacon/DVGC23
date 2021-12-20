@@ -13,6 +13,7 @@ import logging
 import threading
 from time import sleep
 
+
 class CanRxThread(threading.Thread):
     def __init__(self, channel, demo, test_case):
         threading.Thread.__init__(self)
@@ -20,7 +21,7 @@ class CanRxThread(threading.Thread):
         self._ch = channel
         self._test_case = test_case
         self._demo = demo
- 
+
     def stop(self):
         self._running = False
 
@@ -32,7 +33,7 @@ class CanRxThread(threading.Thread):
         elif isinstance(frame, List):
             for f in frame:
                 printframe.print_frame(f)
- 
+
     def run(self):
         if(self._test_case == "write"):
             while self._running:
@@ -48,7 +49,7 @@ class CanRxThread(threading.Thread):
             self.receive(func=faultfunction.duplicate)
             sleep(0.050)
             print("Corrupt...")
-            self.receive(func=faultfunction.corrupt, params=[3,10])
+            self.receive(func=faultfunction.corrupt, params=[3, 10])
             sleep(0.050)
             print("Drop...")
             self.receive(func=faultfunction.drop)
@@ -65,6 +66,7 @@ class CanRxThread(threading.Thread):
             sleep(1)
             self._running = False
 
+
 class CanTxThread(threading.Thread):
     def __init__(self, channel, demo, test_case):
         threading.Thread.__init__(self)
@@ -72,10 +74,10 @@ class CanTxThread(threading.Thread):
         self._ch = channel
         self._demo = demo
         self._test_case = test_case
- 
+
     def stop(self):
         self._running = False
- 
+
     def run(self):
         if(self._test_case == "write"):
             print("Duplicate...")
@@ -100,6 +102,7 @@ class CanTxThread(threading.Thread):
             while(self._running):
                 demo.transceiver.transmit()
                 sleep(1)
+
 
 def setUpChannel(channel=0,
                  openFlags=canlib.canOPEN_ACCEPT_VIRTUAL,
