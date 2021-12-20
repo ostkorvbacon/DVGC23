@@ -137,6 +137,18 @@ def tearDownChannel(ch):
     ch.close()
     logging.debug("End")
 
+def signal_demo():
+    channel_signaltransmit = setUpChannel(channel=0)
+    channel_signalreceive = setUpChannel(channel=1)
+
+    signalsetup = setupsignal.SetupSignal(10)
+    signalsetup.setup()
+    signalsetup.signal_transmit(channel_signaltransmit, channel_signalreceive)
+    signalsetup.signal_receive(channel_signalreceive, channel_signaltransmit)
+
+    tearDownChannel(channel_signaltransmit)
+    tearDownChannel(channel_signalreceive)
+
 if __name__ == '__main__':
     """Setting up logger"""
     logging.basicConfig(filename='logging.log', level=logging.DEBUG,
@@ -182,15 +194,3 @@ if __name__ == '__main__':
 
     tearDownChannel(channel_transmit)
     tearDownChannel(channel_receive)
-
-    # SIGNAL
-    channel_signaltransmit = setUpChannel(channel=0)
-    channel_signalreceive = setUpChannel(channel=1)
-
-    # signalsetup = setupsignal.SetupSignal(10)
-    # signalsetup.setup()
-    # signalsetup.signal_transmit(channel_signaltransmit, channel_signalreceive)
-    # signalsetup.signal_receive(channel_signalreceive, channel_signaltransmit)
-
-    tearDownChannel(channel_signaltransmit)
-    tearDownChannel(channel_signalreceive)
