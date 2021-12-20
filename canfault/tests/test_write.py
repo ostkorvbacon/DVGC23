@@ -58,13 +58,13 @@ class TestWrite(unittest.TestCase):
 
     def test_write(self):
         write(self.channel_write, self.frame1, do_nothing)
-        ret_frame = self.channel_read.read()
+        ret_frame = self.channel_read.read(500)
         self.assertEqual(ret_frame, self.frame1)
 
     def test_write_array(self):
         write(self.channel_write, [self.frame1, self.frame2])
-        ret_frame1 = self.channel_read.read()
-        ret_frame2 = self.channel_read.read()
+        ret_frame1 = self.channel_read.read(500)
+        ret_frame2 = self.channel_read.read(500)
         self.assertEqual([self.frame1, self.frame2], [ret_frame1, ret_frame2])
 
     def test_write_int_as_frame(self):
@@ -72,7 +72,7 @@ class TestWrite(unittest.TestCase):
 
     def test_write_no_func(self):
         write(self.channel_write, self.frame1)
-        ret_frame = self.channel_read.read()
+        ret_frame = self.channel_read.read(500)
         self.assertEqual(ret_frame, self.frame1)
 
     def test_write_int_array_as_frame(self):
@@ -81,7 +81,7 @@ class TestWrite(unittest.TestCase):
 
     def test_write_params(self):
         write(self.channel_write, self.frame1, add, [5])
-        ret_frame = self.channel_read.read()
+        ret_frame = self.channel_read.read(500)
         self.assertEqual(ret_frame.data[0], 5)
 
     def test_write_int_as_channel(self):
