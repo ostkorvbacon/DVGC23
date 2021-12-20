@@ -162,8 +162,6 @@ def insert(frame, params=[]):
     data = random.randint(0, 255)
     new_frame = Frame(frame_id, [data],dlc=8 ,flags=canlib.MessageFlag.EXT)
     logging.debug("End")
-    
-    #print(new_frame,frame, "hej")
 
     return[new_frame, frame]
 
